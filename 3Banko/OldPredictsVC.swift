@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  OldPredictsVC.swift
 //  3Banko
 //
 //  Created by Murat Baykor on 27.10.2020.
@@ -7,15 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class OldPredictsVC: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .green
     }
-
-
 }
 

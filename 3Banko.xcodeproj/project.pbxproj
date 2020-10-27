@@ -9,19 +9,23 @@
 /* Begin PBXBuildFile section */
 		464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD025484D7100B56BFC /* AppDelegate.swift */; };
 		464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD225484D7100B56BFC /* SceneDelegate.swift */; };
-		464B3AD525484D7100B56BFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD425484D7100B56BFC /* ViewController.swift */; };
 		464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464B3AD925484D7300B56BFC /* Assets.xcassets */; };
 		464B3ADD25484D7300B56BFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464B3ADB25484D7300B56BFC /* LaunchScreen.storyboard */; };
+		464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */; };
+		464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AEA254850C700B56BFC /* OldPredictsVC.swift */; };
+		464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AEE254851D600B56BFC /* BOTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		464B3ACD25484D7100B56BFC /* 3Banko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3Banko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464B3AD025484D7100B56BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464B3AD225484D7100B56BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		464B3AD425484D7100B56BFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		464B3AD925484D7300B56BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		464B3ADC25484D7300B56BFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		464B3ADE25484D7300B56BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictOfDayVC.swift; sourceTree = "<group>"; };
+		464B3AEA254850C700B56BFC /* OldPredictsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPredictsVC.swift; sourceTree = "<group>"; };
+		464B3AEE254851D600B56BFC /* BOTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +60,12 @@
 			children = (
 				464B3AD025484D7100B56BFC /* AppDelegate.swift */,
 				464B3AD225484D7100B56BFC /* SceneDelegate.swift */,
-				464B3AD425484D7100B56BFC /* ViewController.swift */,
 				464B3AD925484D7300B56BFC /* Assets.xcassets */,
 				464B3ADB25484D7300B56BFC /* LaunchScreen.storyboard */,
 				464B3ADE25484D7300B56BFC /* Info.plist */,
+				464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */,
+				464B3AEA254850C700B56BFC /* OldPredictsVC.swift */,
+				464B3AEE254851D600B56BFC /* BOTabBarController.swift */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -133,8 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				464B3AD525484D7100B56BFC /* ViewController.swift in Sources */,
 				464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */,
+				464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */,
+				464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */,
+				464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */,
 				464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
