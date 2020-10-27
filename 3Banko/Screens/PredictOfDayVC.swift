@@ -15,7 +15,9 @@ class PredictOfDayVC: UIViewController {
     let predictThree = BOPredictionView(frame: .zero)
     
     //Dummy predictions
-    var predictions = [Prediction(date: "27 Ekim 2020 16:00", name: "Fenerbahce - Besiktas", organization: "Super Lig"), Prediction(date: "27 Ekim 2020 23:00", name: "Manchester United - Real Madrid", organization: "UEFA Sampiyonlar Ligi"), Prediction(date: "27 Ekim 2020 23:00", name: "Sivasspor - Villereal", organization: "UEFA Avrupa Ligi")]
+    var predictions = [Prediction(date: "27 Ekim 2020 16:00", name: "Fenerbahce - Besiktas", organization: "Super Lig", prediction: "2.5 ust", odd: "1.5"),
+                       Prediction(date: "27 Ekim 2020 23:00", name: "Manchester United - Real Madrid", organization: "UEFA Sampiyonlar Ligi", prediction: "2", odd: "2.00"),
+                       Prediction(date: "27 Ekim 2020 23:00", name: "Sivasspor - Villereal", organization: "UEFA Avrupa Ligi", prediction: "3.5 ust", odd: "1.80")]
     
     
     override func viewDidLoad() {
@@ -25,6 +27,8 @@ class PredictOfDayVC: UIViewController {
     }
     
     private func configureViewController() {
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)]
+ 
         view.backgroundColor = .systemBackground
     }
     
@@ -42,12 +46,14 @@ class PredictOfDayVC: UIViewController {
             predictView.dateLabel.text = predictions[index].date
             predictView.matchLabel.text = predictions[index].name
             predictView.organizationLabel.text = predictions[index].organization
+            predictView.predictionBoxView.contentLabel.text = predictions[index].prediction
+            predictView.oddBoxView.contentLabel.text = predictions[index].odd
         }
         
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 75),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20)

@@ -11,4 +11,6 @@ struct Prediction {
     let date: String
     let name: String
     let organization: String
+    let prediction: String
+    let odd: String
 }

@@ -14,11 +14,11 @@
 		464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */; };
 		464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AEA254850C700B56BFC /* OldPredictsVC.swift */; };
 		464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AEE254851D600B56BFC /* BOTabBarController.swift */; };
-		464B3AF22548587A00B56BFC /* BOPredictionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AF12548587A00B56BFC /* BOPredictionCell.swift */; };
 		464B3AF5254858DF00B56BFC /* BOSmallLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AF4254858DF00B56BFC /* BOSmallLabel.swift */; };
 		464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AF7254859D100B56BFC /* BOLabel.swift */; };
 		464B3AFB25485C2200B56BFC /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFA25485C2200B56BFC /* Prediction.swift */; };
 		464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFD2548620A00B56BFC /* BOPredictionView.swift */; };
+		464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,11 +31,11 @@
 		464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictOfDayVC.swift; sourceTree = "<group>"; };
 		464B3AEA254850C700B56BFC /* OldPredictsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPredictsVC.swift; sourceTree = "<group>"; };
 		464B3AEE254851D600B56BFC /* BOTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOTabBarController.swift; sourceTree = "<group>"; };
-		464B3AF12548587A00B56BFC /* BOPredictionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionCell.swift; sourceTree = "<group>"; };
 		464B3AF4254858DF00B56BFC /* BOSmallLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOSmallLabel.swift; sourceTree = "<group>"; };
 		464B3AF7254859D100B56BFC /* BOLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOLabel.swift; sourceTree = "<group>"; };
 		464B3AFA25485C2200B56BFC /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		464B3AFD2548620A00B56BFC /* BOPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionView.swift; sourceTree = "<group>"; };
+		464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,21 +68,69 @@
 		464B3ACF25484D7100B56BFC /* 3Banko */ = {
 			isa = PBXGroup;
 			children = (
+				464B3B2E2548956B00B56BFC /* Supporting Files */,
+				464B3ADE25484D7300B56BFC /* Info.plist */,
+				464B3B242548954400B56BFC /* Screens */,
+				464B3B262548954F00B56BFC /* Views */,
+				464B3B282548955400B56BFC /* TabBarController */,
+				464B3B2A2548955D00B56BFC /* Labels */,
+				464B3B2C2548956200B56BFC /* Model */,
+			);
+			path = 3Banko;
+			sourceTree = "<group>";
+		};
+		464B3B242548954400B56BFC /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */,
+				464B3AEA254850C700B56BFC /* OldPredictsVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		464B3B262548954F00B56BFC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				464B3AFD2548620A00B56BFC /* BOPredictionView.swift */,
+				464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		464B3B282548955400B56BFC /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				464B3AEE254851D600B56BFC /* BOTabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		464B3B2A2548955D00B56BFC /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				464B3AF4254858DF00B56BFC /* BOSmallLabel.swift */,
+				464B3AF7254859D100B56BFC /* BOLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		464B3B2C2548956200B56BFC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				464B3AFA25485C2200B56BFC /* Prediction.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		464B3B2E2548956B00B56BFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				464B3AD025484D7100B56BFC /* AppDelegate.swift */,
 				464B3AD225484D7100B56BFC /* SceneDelegate.swift */,
 				464B3AD925484D7300B56BFC /* Assets.xcassets */,
 				464B3ADB25484D7300B56BFC /* LaunchScreen.storyboard */,
-				464B3ADE25484D7300B56BFC /* Info.plist */,
-				464B3AE7254850BB00B56BFC /* PredictOfDayVC.swift */,
-				464B3AFD2548620A00B56BFC /* BOPredictionView.swift */,
-				464B3AEA254850C700B56BFC /* OldPredictsVC.swift */,
-				464B3AEE254851D600B56BFC /* BOTabBarController.swift */,
-				464B3AF12548587A00B56BFC /* BOPredictionCell.swift */,
-				464B3AF4254858DF00B56BFC /* BOSmallLabel.swift */,
-				464B3AF7254859D100B56BFC /* BOLabel.swift */,
-				464B3AFA25485C2200B56BFC /* Prediction.swift */,
 			);
-			path = 3Banko;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */,
 				464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */,
 				464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */,
 				464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */,
@@ -162,7 +211,6 @@
 				464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */,
 				464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */,
 				464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */,
-				464B3AF22548587A00B56BFC /* BOPredictionCell.swift in Sources */,
 				464B3AF5254858DF00B56BFC /* BOSmallLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  BOSmallLabel.swift
+//  BOLabel.swift
 //  3Banko
 //
 //  Created by Murat Baykor on 27.10.2020.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BOSmallLabel: UILabel {
+class BOLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,8 +20,9 @@ class BOSmallLabel: UILabel {
     
     private func configure() {
         textAlignment = .center
-        font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        textColor = .systemGray
+        font = UIFont.systemFont(ofSize: 22, weight: .regular)
+        textColor = .label
+
         
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
