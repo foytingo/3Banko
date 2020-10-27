@@ -19,8 +19,8 @@ class BOLabel: UILabel {
     }
     
     private func configure() {
-        textAlignment = .left
-        font = UIFont.systemFont(ofSize: 25, weight: .regular)
+        textAlignment = .center
+        font = UIFont.systemFont(ofSize: 20, weight: .regular)
         textColor = .label
         
         adjustsFontSizeToFitWidth = true

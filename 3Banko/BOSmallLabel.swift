@@ -19,7 +19,7 @@ class BOSmallLabel: UILabel {
     }
     
     private func configure() {
-        textAlignment = .left
+        textAlignment = .center
         font = UIFont.systemFont(ofSize: 15, weight: .medium)
         textColor = .systemGray
         
