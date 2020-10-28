@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol BOPredictionViewDelegate: class {
+    func didTapShowPredictButton()
+}
+
 class BOPredictionView: UIView {
 
     let stackView = UIStackView()
@@ -20,6 +24,9 @@ class BOPredictionView: UIView {
     
     @objc let showPredictButton = BOButton(frame: .zero)
 
+    
+    weak var predictViewDelegate: BOPredictionViewDelegate!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -72,8 +79,7 @@ class BOPredictionView: UIView {
             self.predictionBoxStackView.alpha = 1
             
         }) { finished in
-            print("predict show; \(finished)")
-            print("coin count --")
+            self.predictViewDelegate.didTapShowPredictButton()
         }
     }
     

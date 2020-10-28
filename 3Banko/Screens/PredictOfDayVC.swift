@@ -38,11 +38,15 @@ class PredictOfDayVC: UIViewController {
             }
         }
     }
-    
+    var coinCount: Int = 0 {
+        didSet {
+            headerView.set(coinCount: coinCount)
+        }
+    }
     var user: BOUser? {
         didSet {
             guard let user = user else { return }
-            headerView.set(coinCount: user.coinCount)
+            self.coinCount = user.coinCount
         }
     }
     
@@ -51,15 +55,15 @@ class PredictOfDayVC: UIViewController {
         
         anonymousLogin()
         
-        rewardedAd = createAndLoadRewardedAd()
+        
         configureViewController()
         configureHeaderView()
         
         FirebaseManager.shared.loadPredictions { predictions, error in
             guard let predictions = predictions else { return }
             self.predictions = predictions
-            print(predictions)
         }
+        rewardedAd = createAndLoadRewardedAd()
     }
     
     private func configureViewController() {
@@ -88,6 +92,7 @@ class PredictOfDayVC: UIViewController {
         let predictionViewArray = [predictOne, predictTwo, predictThree]
         for predictView in predictionViewArray {
             stackView.addArrangedSubview(predictView)
+            predictView.predictViewDelegate = self
         }
         
         view.addSubview(stackView)
@@ -106,7 +111,7 @@ class PredictOfDayVC: UIViewController {
                 self.userUid = uid
                 return
             }
-            print("Error: \(error)")
+            print("DEBUG: Error: \(error)")
         }
     }
     
@@ -114,13 +119,14 @@ class PredictOfDayVC: UIViewController {
         let rewardedAd = GADRewardedAd(adUnitID: "ca-app-pub-3940256099942544/5224354917")
         rewardedAd.load(GADRequest()) { error in
             if let error = error {
-                print("Error to load ad: \(error)")
+                print("DEBUG: Error to load ad: \(error)")
             } else {
-                print("Ad load successfully")
+                print("DEBUG: Ad load successfully")
             }
         }
         return rewardedAd
     }
+    
     
     
 }
@@ -135,25 +141,48 @@ extension PredictOfDayVC: BOHeaderViewDelegate {
     
 }
 
+extension PredictOfDayVC: BOPredictionViewDelegate {
+    func didTapShowPredictButton() {
+        self.coinCount -= 1
+        FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
+            if let error = error {
+                print("DEBUG: \(error)")
+            } else {
+                print("DEBUG: Coin successfully removed")
+                print("DEBUG: Show coin remove animation")
+            }
+        }
+    }
+    
+    
+}
+
 extension PredictOfDayVC: GADRewardedAdDelegate {
     /// Tells the delegate that the user earned a reward.
     func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
-        print("Reward received with currency: \(reward.type), amount \(reward.amount as Decimal / 10.0).")
-        
+        self.coinCount += 1
+        FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
+            if let error = error {
+                print("DEBUG: \(error)")
+            } else {
+                print("DEBUG: Coin successfully added")
+            }
+        }
     }
     /// Tells the delegate that the rewarded ad was presented.
     func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
-        print("Rewarded ad presented.")
+        print("DEBUG: Rewarded ad presented.")
     }
     /// Tells the delegate that the rewarded ad was dismissed.
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
-        print("Rewarded ad dismissed.")
+        print("DEBUG: Rewarded ad dismissed.")
         self.rewardedAd = createAndLoadRewardedAd()
+        print("DEBUG: Show coin add animation")
         
     }
     /// Tells the delegate that the rewarded ad failed to present.
     func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
-        print("Rewarded ad failed to present.")
+        print("DEBUG: Rewarded ad failed to present.")
     }
     
     

@@ -67,8 +67,21 @@ struct FirebaseManager {
             }
             
         }
+    }
+    
+    func updateCoin(uid: String, coinCount: Int, completion: @escaping(Error?) -> Void) {
+        //db.collection("Users").document(uid).updateData(["coinCount": coinCount])
+        db.collection("Users").document(uid).updateData(["coinCount": coinCount]) { error in
+            if let error = error {
+                completion(error)
+            } else {
+              completion(nil)
+            }
+        }
+        
         
     }
+    
     
 
 }
