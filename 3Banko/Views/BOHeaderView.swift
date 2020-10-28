@@ -14,7 +14,6 @@ protocol BOHeaderViewDelegate: class {
 class BOHeaderView: UIView {
 
     let coinImageView = UIImageView(image: UIImage(named: "coins"))
-    let coinLabel = BOSmallLabel(frame: .zero)
     let coinCountLabel = BOSmallLabel(frame: .zero)
     let earnCoinButton = UIButton(type: .custom)
     
@@ -34,9 +33,6 @@ class BOHeaderView: UIView {
         backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 15
         
-        coinLabel.text = "Jeton: "
-        coinCountLabel.text = "12"
-    
         coinImageView.translatesAutoresizingMaskIntoConstraints = false
         earnCoinButton.translatesAutoresizingMaskIntoConstraints = false
         earnCoinButton.setTitle("Jeton Kazan", for: .normal)
@@ -46,7 +42,6 @@ class BOHeaderView: UIView {
         
         addSubview(coinImageView)
         addSubview(coinCountLabel)
-        addSubview(coinLabel)
         addSubview(earnCoinButton)
         NSLayoutConstraint.activate([
             coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -54,17 +49,18 @@ class BOHeaderView: UIView {
             coinImageView.widthAnchor.constraint(equalToConstant: 30),
             coinImageView.heightAnchor.constraint(equalToConstant: 30),
             
-            coinLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            coinLabel.leadingAnchor.constraint(equalTo: coinImageView.trailingAnchor, constant: 10),
-            
             coinCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            coinCountLabel.leadingAnchor.constraint(equalTo: coinLabel.trailingAnchor, constant: 5),
+            coinCountLabel.leadingAnchor.constraint(equalTo: coinImageView.trailingAnchor, constant: 10),
             
             earnCoinButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             earnCoinButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             earnCoinButton.widthAnchor.constraint(equalToConstant: 120),
             earnCoinButton.heightAnchor.constraint(equalToConstant: 30)
         ])
+    }
+    
+    func set(coinCount: Int) {
+        coinCountLabel.text = "Jeton: \(coinCount)"
     }
     
     @objc func earnCoinAction() {

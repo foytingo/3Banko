@@ -32,7 +32,17 @@ class PredictOfDayVC: UIViewController {
     var rewardedAd: GADRewardedAd?
     var userUid: String? {
         didSet {
-            print("UserUID: \(self.userUid)")
+            guard let userUid = userUid else { return}
+            FirebaseManager.shared.getUser(uid: userUid) { user, error in
+                self.user = user
+            }
+        }
+    }
+    
+    var user: BOUser? {
+        didSet {
+            guard let user = user else { return }
+            headerView.set(coinCount: user.coinCount)
         }
     }
     

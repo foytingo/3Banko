@@ -10,4 +10,5 @@ import Foundation
 struct BOUser {
     let uid: String
     var coinCount: Int
+    var isPaidUser: Bool
 }
