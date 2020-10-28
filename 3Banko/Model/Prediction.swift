@@ -13,4 +13,6 @@ struct Prediction {
     let organization: String
     let prediction: String
     let odd: String
+    let isFree: Bool
+    let price: Int
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46421CAB25495A2D001772B8 /* BOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46421CAA25495A2D001772B8 /* BOButton.swift */; };
 		464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD025484D7100B56BFC /* AppDelegate.swift */; };
 		464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD225484D7100B56BFC /* SceneDelegate.swift */; };
 		464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464B3AD925484D7300B56BFC /* Assets.xcassets */; };
@@ -19,9 +20,11 @@
 		464B3AFB25485C2200B56BFC /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFA25485C2200B56BFC /* Prediction.swift */; };
 		464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFD2548620A00B56BFC /* BOPredictionView.swift */; };
 		464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */; };
+		464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B2F254895D500B56BFC /* BOHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46421CAA25495A2D001772B8 /* BOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOButton.swift; sourceTree = "<group>"; };
 		464B3ACD25484D7100B56BFC /* 3Banko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3Banko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464B3AD025484D7100B56BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464B3AD225484D7100B56BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		464B3AFA25485C2200B56BFC /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		464B3AFD2548620A00B56BFC /* BOPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionView.swift; sourceTree = "<group>"; };
 		464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubView.swift; sourceTree = "<group>"; };
+		464B3B2F254895D500B56BFC /* BOHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 				464B3B282548955400B56BFC /* TabBarController */,
 				464B3B2A2548955D00B56BFC /* Labels */,
 				464B3B2C2548956200B56BFC /* Model */,
+				46421CAA25495A2D001772B8 /* BOButton.swift */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -93,6 +98,7 @@
 			children = (
 				464B3AFD2548620A00B56BFC /* BOPredictionView.swift */,
 				464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */,
+				464B3B2F254895D500B56BFC /* BOHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +213,8 @@
 				464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */,
 				464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */,
 				464B3AFB25485C2200B56BFC /* Prediction.swift in Sources */,
+				464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */,
+				46421CAB25495A2D001772B8 /* BOButton.swift in Sources */,
 				464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */,
 				464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */,
 				464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */,

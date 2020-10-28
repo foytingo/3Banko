@@ -32,7 +32,7 @@ class BOPredictionSubView: UIView {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .tertiarySystemBackground
+        backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 10
         
         stackView.axis = .vertical
