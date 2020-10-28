@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol BOHeaderViewDelegate: class {
+    func didTapEarnCoinButton()
+}
+
 class BOHeaderView: UIView {
 
     let coinImageView = UIImageView(image: UIImage(named: "coins"))
     let coinLabel = BOSmallLabel(frame: .zero)
     let coinCountLabel = BOSmallLabel(frame: .zero)
     let earnCoinButton = UIButton(type: .custom)
+    
+    weak var headerViewDelegate: BOHeaderViewDelegate!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +42,7 @@ class BOHeaderView: UIView {
         earnCoinButton.setTitle("Jeton Kazan", for: .normal)
         earnCoinButton.layer.cornerRadius = 10
         earnCoinButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        earnCoinButton.addTarget(self, action: #selector(earnCoinAction), for: .touchUpInside)
         
         addSubview(coinImageView)
         addSubview(coinCountLabel)
@@ -58,6 +65,10 @@ class BOHeaderView: UIView {
             earnCoinButton.widthAnchor.constraint(equalToConstant: 120),
             earnCoinButton.heightAnchor.constraint(equalToConstant: 30)
         ])
+    }
+    
+    @objc func earnCoinAction() {
+        headerViewDelegate.didTapEarnCoinButton()
     }
 
 }

@@ -110,14 +110,14 @@ class BOPredictionView: UIView {
     
     
     
-    func set(predict: Prediction) {
-        dateLabel.text = predict.date
-        matchLabel.text = predict.name
-        organizationLabel.text = predict.organization
-        predictionBoxView.contentLabel.text = predict.prediction
-        oddBoxView.contentLabel.text = predict.odd
+    func set(predict: [String: Any]) {
+        dateLabel.text = (predict["date"] as! String)
+        matchLabel.text = (predict["name"] as! String)
+        organizationLabel.text = (predict["organization"] as! String)
+        predictionBoxView.contentLabel.text = (predict["prediction"] as! String)
+        oddBoxView.contentLabel.text = (predict["odd"] as! String)
         
-        if predict.isFree {
+        if (predict["isFree"] as! Bool) {
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
             
