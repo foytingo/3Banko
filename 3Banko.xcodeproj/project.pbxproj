@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		46421CAB25495A2D001772B8 /* BOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46421CAA25495A2D001772B8 /* BOButton.swift */; };
+		46421CB0254969B8001772B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46421CAF254969B8001772B8 /* FirebaseManager.swift */; };
+		46421CB325496AFC001772B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46421CB225496AFC001772B8 /* GoogleService-Info.plist */; };
 		464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD025484D7100B56BFC /* AppDelegate.swift */; };
 		464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD225484D7100B56BFC /* SceneDelegate.swift */; };
 		464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464B3AD925484D7300B56BFC /* Assets.xcassets */; };
@@ -21,10 +23,14 @@
 		464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFD2548620A00B56BFC /* BOPredictionView.swift */; };
 		464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */; };
 		464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B2F254895D500B56BFC /* BOHeaderView.swift */; };
+		F8C45629384E752CDBB90F98 /* Pods_3Banko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41636D0C22CC5BA6A3A94A7B /* Pods-3Banko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3Banko.debug.xcconfig"; path = "Target Support Files/Pods-3Banko/Pods-3Banko.debug.xcconfig"; sourceTree = "<group>"; };
 		46421CAA25495A2D001772B8 /* BOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOButton.swift; sourceTree = "<group>"; };
+		46421CAF254969B8001772B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		46421CB225496AFC001772B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		464B3ACD25484D7100B56BFC /* 3Banko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3Banko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464B3AD025484D7100B56BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464B3AD225484D7100B56BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +46,8 @@
 		464B3AFD2548620A00B56BFC /* BOPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionView.swift; sourceTree = "<group>"; };
 		464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubView.swift; sourceTree = "<group>"; };
 		464B3B2F254895D500B56BFC /* BOHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOHeaderView.swift; sourceTree = "<group>"; };
+		E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3Banko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0B521D34643355530A8941F /* Pods-3Banko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3Banko.release.xcconfig"; path = "Target Support Files/Pods-3Banko/Pods-3Banko.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,17 +55,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C45629384E752CDBB90F98 /* Pods_3Banko.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46421CAD25496992001772B8 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				46421CAA25495A2D001772B8 /* BOButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		464B3AC425484D7100B56BFC = {
 			isa = PBXGroup;
 			children = (
 				464B3ACF25484D7100B56BFC /* 3Banko */,
 				464B3ACE25484D7100B56BFC /* Products */,
+				6821815D91B60B9A80AEDE97 /* Pods */,
+				F97F0B05EE7E578DF39E34CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,12 +93,14 @@
 			children = (
 				464B3B2E2548956B00B56BFC /* Supporting Files */,
 				464B3ADE25484D7300B56BFC /* Info.plist */,
+				46421CB225496AFC001772B8 /* GoogleService-Info.plist */,
 				464B3B242548954400B56BFC /* Screens */,
 				464B3B262548954F00B56BFC /* Views */,
 				464B3B282548955400B56BFC /* TabBarController */,
 				464B3B2A2548955D00B56BFC /* Labels */,
 				464B3B2C2548956200B56BFC /* Model */,
-				46421CAA25495A2D001772B8 /* BOButton.swift */,
+				46421CAD25496992001772B8 /* Buttons */,
+				46421CAF254969B8001772B8 /* FirebaseManager.swift */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -139,6 +160,24 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6821815D91B60B9A80AEDE97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				41636D0C22CC5BA6A3A94A7B /* Pods-3Banko.debug.xcconfig */,
+				F0B521D34643355530A8941F /* Pods-3Banko.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F97F0B05EE7E578DF39E34CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,9 +185,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 464B3AE125484D7300B56BFC /* Build configuration list for PBXNativeTarget "3Banko" */;
 			buildPhases = (
+				F4E3E4A2406309E4702CBB46 /* [CP] Check Pods Manifest.lock */,
 				464B3AC925484D7100B56BFC /* Sources */,
 				464B3ACA25484D7100B56BFC /* Frameworks */,
 				464B3ACB25484D7100B56BFC /* Resources */,
+				DFDBBE3B4617BF2849E712D9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,16 +239,60 @@
 			files = (
 				464B3ADD25484D7300B56BFC /* LaunchScreen.storyboard in Resources */,
 				464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */,
+				46421CB325496AFC001772B8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DFDBBE3B4617BF2849E712D9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-3Banko/Pods-3Banko-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-3Banko/Pods-3Banko-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-3Banko/Pods-3Banko-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4E3E4A2406309E4702CBB46 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-3Banko-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		464B3AC925484D7100B56BFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46421CB0254969B8001772B8 /* FirebaseManager.swift in Sources */,
 				464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */,
 				464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */,
 				464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */,
@@ -355,6 +440,7 @@
 		};
 		464B3AE225484D7300B56BFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41636D0C22CC5BA6A3A94A7B /* Pods-3Banko.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -374,6 +460,7 @@
 		};
 		464B3AE325484D7300B56BFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0B521D34643355530A8941F /* Pods-3Banko.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

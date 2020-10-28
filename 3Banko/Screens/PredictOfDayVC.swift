@@ -19,9 +19,9 @@ class PredictOfDayVC: UIViewController {
 
     
     //Dummy predictions
-    var predictions = [Prediction(date: "27 Ekim 2020 16:00", name: "Fenerbahce - Besiktas", organization: "Super Lig", prediction: "2.5 ust", odd: "1.5", isFree: false, price: 1),
-                       Prediction(date: "27 Ekim 2020 23:00", name: "Manchester United - Real Madrid", organization: "UEFA Sampiyonlar Ligi", prediction: "2", odd: "2.00", isFree: true, price: 0),
-                       Prediction(date: "27 Ekim 2020 23:00", name: "Sivasspor - Villereal", organization: "UEFA Avrupa Ligi", prediction: "3.5 ust", odd: "1.80", isFree: true, price: 0)]
+    var predictions = [Prediction(date: "27 Ekim 2020 16:00", name: "Fenerbahce - Besiktas", organization: "Super Lig", prediction: "2.5 ust", odd: "1.5", isFree: false),
+                       Prediction(date: "27 Ekim 2020 23:00", name: "Manchester United - Real Madrid", organization: "UEFA Sampiyonlar Ligi", prediction: "2", odd: "2.00", isFree: true),
+                       Prediction(date: "27 Ekim 2020 23:00", name: "Sivasspor - Villereal", organization: "UEFA Avrupa Ligi", prediction: "3.5 ust", odd: "1.80", isFree: true)]
     
     
     override func viewDidLoad() {

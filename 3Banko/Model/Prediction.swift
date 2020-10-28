@@ -14,5 +14,4 @@ struct Prediction {
     let prediction: String
     let odd: String
     let isFree: Bool
-    let price: Int
 }
