@@ -23,6 +23,7 @@
 		464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AFD2548620A00B56BFC /* BOPredictionView.swift */; };
 		464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */; };
 		464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B2F254895D500B56BFC /* BOHeaderView.swift */; };
+		4696536725499E91007C2556 /* BOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696536625499E91007C2556 /* BOUser.swift */; };
 		F8C45629384E752CDBB90F98 /* Pods_3Banko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		464B3AFD2548620A00B56BFC /* BOPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionView.swift; sourceTree = "<group>"; };
 		464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubView.swift; sourceTree = "<group>"; };
 		464B3B2F254895D500B56BFC /* BOHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOHeaderView.swift; sourceTree = "<group>"; };
+		4696536625499E91007C2556 /* BOUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOUser.swift; sourceTree = "<group>"; };
 		E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3Banko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B521D34643355530A8941F /* Pods-3Banko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3Banko.release.xcconfig"; path = "Target Support Files/Pods-3Banko/Pods-3Banko.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				464B3AFA25485C2200B56BFC /* Prediction.swift */,
+				4696536625499E91007C2556 /* BOUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */,
 				464B3AFE2548620A00B56BFC /* BOPredictionView.swift in Sources */,
 				464B3AFB25485C2200B56BFC /* Prediction.swift in Sources */,
+				4696536725499E91007C2556 /* BOUser.swift in Sources */,
 				464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */,
 				46421CAB25495A2D001772B8 /* BOButton.swift in Sources */,
 				464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */,

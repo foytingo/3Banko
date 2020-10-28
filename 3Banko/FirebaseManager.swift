@@ -26,42 +26,25 @@ struct FirebaseManager {
                 completion(predicts,error)
             }
         }
-        
-//        db.collection("predicts").document("Day1").getDocument { snapshot, error in
-//            if let error = error {
-//                completion(predicts, error)
-//            } else {
-//                guard let snapshot = snapshot else {
-//                    completion(predicts,error)
-//                    return
-//                }
-//                predicts = snapshot.data()
-//                completion(predicts,error)
-//            }
-//        }
-        
-//        db.collection("predicts").getDocuments { snapshot, error in
-//            if let error = error {
-//                completion(predicts, error)
-//            } else {
-//                snapshot?.documents[0].data()
-//
-//                for document in snapshot!.documents {
-//                    let date = document.data()["date"] as! Double
-//                    let name = document.data()["name"] as! String
-//                    let organization = document.data()["organization"] as! String
-//                    let prediction = document.data()["prediction"] as! String
-//                    let odd = document.data()["odd"] as! String
-//                    let isFree = document.data()["isFree"] as! Bool
-//
-//                    let predict = Prediction(date: String(date), name: name, organization: organization, prediction: prediction, odd: odd, isFree: isFree)
-//
-//                    predicts.append(predict)
-//                }
-//            }
-//
-//        }
-        
     }
     
+    func authAnonymous(completion: @escaping(String, Error?) -> Void) {
+        var uid = ""
+        Auth.auth().signInAnonymously { authResult, error in
+            if let error = error {
+                completion(uid, error)
+            } else {
+                guard let user = authResult?.user else { return }
+                uid = user.uid
+                completion(uid,error)
+            }
+        }
+    }
+    
+//    func createUserCollection(user: BOUser, completion: @escaping(Error?)-> Void) {
+//        
+//        db.collection("Users").addDocument(data: ["userUid" : user.uid, "coinCount" : user.coinCount], completion: completion)
+//
+//      
+//    }
 }

@@ -28,15 +28,19 @@ class PredictOfDayVC: UIViewController {
             configurePredictViews()
         }
     }
-    //Dummy predictions
-    //    var predictions = [Prediction(date: "27 Ekim 2020 16:00", name: "Fenerbahce - Besiktas", organization: "Super Lig", prediction: "2.5 ust", odd: "1.5", isFree: false),
-    //                       Prediction(date: "27 Ekim 2020 23:00", name: "Manchester United - Real Madrid", organization: "UEFA Sampiyonlar Ligi", prediction: "2", odd: "2.00", isFree: true),
-    //                       Prediction(date: "27 Ekim 2020 23:00", name: "Sivasspor - Villereal", organization: "UEFA Avrupa Ligi", prediction: "3.5 ust", odd: "1.80", isFree: true)]
-    
+
     var rewardedAd: GADRewardedAd?
+    var userUid: String? {
+        didSet {
+            print("UserUID: \(self.userUid)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        anonymousLogin()
+        
         rewardedAd = createAndLoadRewardedAd()
         configureViewController()
         configureHeaderView()
@@ -46,9 +50,6 @@ class PredictOfDayVC: UIViewController {
             self.predictions = predictions
             print(predictions)
         }
-        
-        
-        
     }
     
     private func configureViewController() {
@@ -87,6 +88,16 @@ class PredictOfDayVC: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -20)
         ])
+    }
+    
+    func anonymousLogin() {
+        FirebaseManager.shared.authAnonymous { (uid, error) in
+            guard let error = error else {
+                self.userUid = uid
+                return
+            }
+            print("Error: \(error)")
+        }
     }
     
     func createAndLoadRewardedAd() -> GADRewardedAd? {
