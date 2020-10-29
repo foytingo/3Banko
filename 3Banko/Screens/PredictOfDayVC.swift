@@ -47,6 +47,10 @@ class PredictOfDayVC: UIViewController {
         didSet {
             guard let user = user else { return }
             self.coinCount = user.coinCount
+            let predictionViewArray = [predictOne, predictTwo, predictThree]
+            for predictionView in predictionViewArray {
+                predictionView.set(user: user)
+            }
         }
     }
     
@@ -142,17 +146,24 @@ extension PredictOfDayVC: BOHeaderViewDelegate {
 }
 
 extension PredictOfDayVC: BOPredictionViewDelegate {
-    func didTapShowPredictButton() {
-        self.coinCount -= 1
-        FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
-            if let error = error {
-                print("DEBUG: \(error)")
-            } else {
-                print("DEBUG: Coin successfully removed")
-                print("DEBUG: Show coin remove animation")
+    func didTapShowPredictButton() -> Bool {
+        if coinCount < 1 {
+            return false
+        } else {
+            self.coinCount -= 1
+            FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
+                if let error = error {
+                    print("DEBUG: \(error)")
+                } else {
+                    print("DEBUG: Coin successfully removed")
+                    print("DEBUG: Show coin remove animation")
+                }
             }
+
+            return true
         }
     }
+
     
     
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BOPredictionViewDelegate: class {
-    func didTapShowPredictButton()
+    func didTapShowPredictButton() -> Bool
 }
 
 class BOPredictionView: UIView {
@@ -26,7 +26,7 @@ class BOPredictionView: UIView {
 
     
     weak var predictViewDelegate: BOPredictionViewDelegate!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -65,22 +65,23 @@ class BOPredictionView: UIView {
     }
     
     @objc func showPredictButtonAction() {
-        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
-            self.showPredictButton.alpha = 0
-        }) { finished in
-            self.showPredictButton.isHidden = true
-            self.testFunc()
+        if self.predictViewDelegate.didTapShowPredictButton() {
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
+                self.showPredictButton.alpha = 0
+            }) { finished in
+                self.showPredictButton.isHidden = true
+                self.showPredictBoxAnimation()
+            }
+        } else {
+            print("DEBUG: Present alert with earn coin button and ok button.")
         }
-
+        
     }
     
-    @objc func testFunc() {
+    @objc func showPredictBoxAnimation() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
             self.predictionBoxStackView.alpha = 1
-            
-        }) { finished in
-            self.predictViewDelegate.didTapShowPredictButton()
-        }
+        })
     }
     
     private func layoutUI() {
@@ -129,6 +130,7 @@ class BOPredictionView: UIView {
             
         }
     }
+    
 
 }
 
