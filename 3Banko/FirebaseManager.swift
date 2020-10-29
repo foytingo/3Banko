@@ -47,7 +47,7 @@ struct FirebaseManager {
                 completion(error)
             } else {
                 guard let user = authResult?.user else { return }
-                db.collection("Users").document(user.uid).setData(["userUid" : user.uid, "coinCount" : 0, "isPaidUser": false])
+                db.collection("Users").document(user.uid).setData(["userUid" : user.uid, "coinCount" : 5, "isPaidUser": false])
             }
         }
     }

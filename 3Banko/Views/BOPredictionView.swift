@@ -27,6 +27,17 @@ class BOPredictionView: UIView {
     
     weak var predictViewDelegate: BOPredictionViewDelegate!
 
+    var predictBoxIsShowed: Bool = false
+    var predictUid: String? {
+        didSet {
+            guard let predictUid = predictUid else { return }
+            predictBoxIsShowed = defaults.bool(forKey: predictUid)
+            print("DEBUG: predict \(predictUid) loaded as \(predictBoxIsShowed)")
+        }
+    }
+    
+    let defaults = UserDefaults.standard
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -66,6 +77,12 @@ class BOPredictionView: UIView {
     
     @objc func showPredictButtonAction() {
         if self.predictViewDelegate.didTapShowPredictButton() {
+            guard let predictUid = predictUid else { return }
+            
+            predictBoxIsShowed = true
+            defaults.set(predictBoxIsShowed, forKey: predictUid)
+            print("DEBUG: predictBoxIsshowed saved as \(predictBoxIsShowed)")
+            
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.showPredictButton.alpha = 0
             }) { finished in
@@ -123,11 +140,16 @@ class BOPredictionView: UIView {
         organizationLabel.text = (predict["organization"] as! String)
         predictionBoxView.contentLabel.text = (predict["prediction"] as! String)
         oddBoxView.contentLabel.text = (predict["odd"] as! String)
+        predictUid = predict["uuid"] as? String
+        
         
         if (predict["isFree"] as! Bool) {
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
             
+        } else if predictBoxIsShowed {
+            showPredictButton.isHidden = true
+            predictionBoxStackView.alpha = 1
         }
     }
     

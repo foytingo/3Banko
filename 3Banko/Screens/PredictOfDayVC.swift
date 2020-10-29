@@ -47,10 +47,7 @@ class PredictOfDayVC: UIViewController {
         didSet {
             guard let user = user else { return }
             self.coinCount = user.coinCount
-            let predictionViewArray = [predictOne, predictTwo, predictThree]
-            for predictionView in predictionViewArray {
-                predictionView.set(user: user)
-            }
+            
         }
     }
     
@@ -151,12 +148,16 @@ extension PredictOfDayVC: BOPredictionViewDelegate {
             return false
         } else {
             self.coinCount -= 1
+            
+            self.headerView.coinUpAndDownAnimation(coinCase: .down)
+            
             FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
                 if let error = error {
                     print("DEBUG: \(error)")
                 } else {
                     print("DEBUG: Coin successfully removed")
                     print("DEBUG: Show coin remove animation")
+                    
                 }
             }
 
@@ -189,6 +190,7 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
         print("DEBUG: Rewarded ad dismissed.")
         self.rewardedAd = createAndLoadRewardedAd()
         print("DEBUG: Show coin add animation")
+        self.headerView.coinUpAndDownAnimation(coinCase: .up)
         
     }
     /// Tells the delegate that the rewarded ad failed to present.
