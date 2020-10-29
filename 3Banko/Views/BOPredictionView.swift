@@ -48,6 +48,7 @@ class BOPredictionView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +135,7 @@ class BOPredictionView: UIView {
     
     
     
-    func set(predict: [String: Any]) {
+    func set(predict: [String: Any], isOld: Bool) {
         dateLabel.text = (predict["date"] as! String)
         matchLabel.text = (predict["name"] as! String)
         organizationLabel.text = (predict["organization"] as! String)
@@ -148,6 +149,9 @@ class BOPredictionView: UIView {
             predictionBoxStackView.alpha = 1
             
         } else if predictBoxIsShowed {
+            showPredictButton.isHidden = true
+            predictionBoxStackView.alpha = 1
+        } else if isOld {
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
         }

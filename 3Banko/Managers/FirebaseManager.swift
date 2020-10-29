@@ -28,6 +28,23 @@ struct FirebaseManager {
         }
     }
     
+    func getAllPredictions(completion: @escaping ([[String: Any]], Error?) -> Void) {
+        var allPredictsArray = [[String: Any]]()
+        
+        db.collection("predicts").getDocuments { snapshot, error in
+            if let error = error {
+                completion(allPredictsArray, error)
+            } else {
+                for document in snapshot!.documents {
+                    allPredictsArray.append(document.data())
+                }
+
+                completion(allPredictsArray,error)
+            }
+        }
+    }
+    
+    
     func authAnonymous(completion: @escaping(String, Error?) -> Void) {
         var uid = ""
         Auth.auth().signInAnonymously { authResult, error in

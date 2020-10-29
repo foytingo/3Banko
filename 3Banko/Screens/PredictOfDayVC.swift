@@ -23,7 +23,7 @@ class PredictOfDayVC: UIViewController {
         didSet {
             let predictionViewArray = [predictOne, predictTwo, predictThree]
             for (index, predictView) in predictionViewArray.enumerated() {
-                predictView.set(predict: predictions!["predict\(index + 1)"] as! [String : Any])
+                predictView.set(predict: predictions!["predict\(index + 1)"] as! [String : Any], isOld: false)
             }
             configurePredictViews()
         }
