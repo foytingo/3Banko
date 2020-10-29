@@ -25,6 +25,7 @@
 		464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B2F254895D500B56BFC /* BOHeaderView.swift */; };
 		4696536725499E91007C2556 /* BOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696536625499E91007C2556 /* BOUser.swift */; };
 		46EE7F88254AD2D60054A473 /* SingleOldPredictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE7F87254AD2D60054A473 /* SingleOldPredictVC.swift */; };
+		46EE7F8C254AE6A80054A473 /* BODataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */; };
 		F8C45629384E752CDBB90F98 /* Pods_3Banko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		464B3B2F254895D500B56BFC /* BOHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOHeaderView.swift; sourceTree = "<group>"; };
 		4696536625499E91007C2556 /* BOUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOUser.swift; sourceTree = "<group>"; };
 		46EE7F87254AD2D60054A473 /* SingleOldPredictVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOldPredictVC.swift; sourceTree = "<group>"; };
+		46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BODataLoadingViewController.swift; sourceTree = "<group>"; };
 		E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3Banko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B521D34643355530A8941F /* Pods-3Banko.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3Banko.release.xcconfig"; path = "Target Support Files/Pods-3Banko/Pods-3Banko.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 				464B3B2C2548956200B56BFC /* Model */,
 				46421CAD25496992001772B8 /* Buttons */,
 				46EE7F8A254AE66E0054A473 /* Managers */,
+				46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				46421CAB25495A2D001772B8 /* BOButton.swift in Sources */,
 				464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */,
 				464B3AEB254850C700B56BFC /* OldPredictsVC.swift in Sources */,
+				46EE7F8C254AE6A80054A473 /* BODataLoadingViewController.swift in Sources */,
 				464B3AEF254851D600B56BFC /* BOTabBarController.swift in Sources */,
 				464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */,
 				464B3AF5254858DF00B56BFC /* BOSmallLabel.swift in Sources */,

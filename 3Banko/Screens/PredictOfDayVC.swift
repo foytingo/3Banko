@@ -8,7 +8,7 @@
 import UIKit
 import GoogleMobileAds
 
-class PredictOfDayVC: UIViewController {
+class PredictOfDayVC: BODataLoadingViewController {
     
     let headerView = BOHeaderView(frame: .zero)
     
@@ -17,7 +17,7 @@ class PredictOfDayVC: UIViewController {
     let predictTwo = BOPredictionView(frame: .zero)
     let predictThree = BOPredictionView(frame: .zero)
     
-    
+    var didEarnCoin = false
     
     var predictions: [String: Any]? {
         didSet {
@@ -53,18 +53,23 @@ class PredictOfDayVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         anonymousLogin()
-        
         
         configureViewController()
         configureHeaderView()
         
+        getDailyPredictions()
+       
+        rewardedAd = createAndLoadRewardedAd()
+    }
+    
+    private func getDailyPredictions() {
+        showLoadingView()
         FirebaseManager.shared.loadPredictions { predictions, error in
+            self.dismissLoadingView()
             guard let predictions = predictions else { return }
             self.predictions = predictions
         }
-        rewardedAd = createAndLoadRewardedAd()
     }
     
     private func configureViewController() {
@@ -166,20 +171,14 @@ extension PredictOfDayVC: BOPredictionViewDelegate {
     }
 
     
-    
+
 }
 
 extension PredictOfDayVC: GADRewardedAdDelegate {
     /// Tells the delegate that the user earned a reward.
     func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
-        self.coinCount += 1
-        FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
-            if let error = error {
-                print("DEBUG: \(error)")
-            } else {
-                print("DEBUG: Coin successfully added")
-            }
-        }
+        didEarnCoin = true
+
     }
     /// Tells the delegate that the rewarded ad was presented.
     func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
@@ -190,7 +189,19 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
         print("DEBUG: Rewarded ad dismissed.")
         self.rewardedAd = createAndLoadRewardedAd()
         print("DEBUG: Show coin add animation")
-        self.headerView.coinUpAndDownAnimation(coinCase: .up)
+        if didEarnCoin {
+            self.coinCount += 1
+            FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
+                if let error = error {
+                    print("DEBUG: \(error)")
+                } else {
+                    print("DEBUG: Coin successfully added")
+                }
+            }
+            self.headerView.coinUpAndDownAnimation(coinCase: .up)
+            didEarnCoin = false
+        }
+        
         
     }
     /// Tells the delegate that the rewarded ad failed to present.

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OldPredictsVC: UIViewController {
+class OldPredictsVC: BODataLoadingViewController {
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
@@ -31,7 +31,9 @@ class OldPredictsVC: UIViewController {
     }
     
     private func getAllPredicts() {
+        showLoadingView()
         FirebaseManager.shared.getAllPredictions { predictions, error in
+            self.dismissLoadingView()
             if let error = error {
                 print("DEBUG: error for load all predictions: \(error)")
             } else {
