@@ -11,12 +11,29 @@ class OldPredictsVC: BODataLoadingViewController {
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
+    let refreshButton = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+    
     var allPredictions = [[String: Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        refreshButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        refreshButton.layer.cornerRadius = 10
+        refreshButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
+        refreshButton.tintColor = .white
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: refreshButton)
+        
         configureTableView()
+        getAllPredicts()
+        
+    }
+    
+    @objc func refreshAction() {
         getAllPredicts()
     }
     

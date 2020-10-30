@@ -13,6 +13,7 @@ enum CoinCase {
 
 protocol BOHeaderViewDelegate: class {
     func didTapEarnCoinButton()
+    func didTapRefreshButton()
 }
 
 class BOHeaderView: UIView {
@@ -20,7 +21,9 @@ class BOHeaderView: UIView {
     let coinImageView = UIImageView(image: UIImage(named: "coins"))
     let coinCountLabel = BOSmallLabel(frame: .zero)
     let earnCoinButton = UIButton(type: .custom)
+    let refreshButton = UIButton(type: .custom)
     let arrowImageView = UIImageView()
+    
     
     weak var headerViewDelegate: BOHeaderViewDelegate!
     
@@ -41,17 +44,24 @@ class BOHeaderView: UIView {
         coinImageView.translatesAutoresizingMaskIntoConstraints = false
         arrowImageView.translatesAutoresizingMaskIntoConstraints = false
         earnCoinButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
         
+        earnCoinButtonStatus(isActive: false)
         earnCoinButton.setTitle("Jeton Kazan", for: .normal)
         earnCoinButton.layer.cornerRadius = 10
-        earnCoinButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
         earnCoinButton.addTarget(self, action: #selector(earnCoinAction), for: .touchUpInside)
         
-    
+        refreshButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        refreshButton.layer.cornerRadius = 10
+        refreshButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        refreshButton.tintColor = .white
+        refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
+        
         addSubview(coinImageView)
         addSubview(coinCountLabel)
         addSubview(arrowImageView)
         addSubview(earnCoinButton)
+        addSubview(refreshButton)
         NSLayoutConstraint.activate([
             coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             coinImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -62,12 +72,17 @@ class BOHeaderView: UIView {
             coinCountLabel.leadingAnchor.constraint(equalTo: coinImageView.trailingAnchor, constant: 14),
             
             arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            arrowImageView.leadingAnchor.constraint(equalTo: coinCountLabel.trailingAnchor, constant: 14),
+            arrowImageView.leadingAnchor.constraint(equalTo: coinCountLabel.trailingAnchor, constant: 10),
             arrowImageView.widthAnchor.constraint(equalToConstant: 20),
             arrowImageView.heightAnchor.constraint(equalToConstant: 20),
             
+            refreshButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            refreshButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            refreshButton.widthAnchor.constraint(equalToConstant: 40),
+            refreshButton.heightAnchor.constraint(equalToConstant: 30),
+            
             earnCoinButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            earnCoinButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            earnCoinButton.trailingAnchor.constraint(equalTo: refreshButton.leadingAnchor, constant: -10),
             earnCoinButton.widthAnchor.constraint(equalToConstant: 120),
             earnCoinButton.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -75,6 +90,16 @@ class BOHeaderView: UIView {
     
     func set(coinCount: Int) {
         coinCountLabel.text = "Jeton: \(coinCount)"
+    }
+    
+    func earnCoinButtonStatus(isActive: Bool) {
+        if isActive {
+            earnCoinButton.isEnabled = true
+            earnCoinButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        } else {
+            earnCoinButton.isEnabled = false
+            earnCoinButton.backgroundColor = .systemGray
+        }
     }
     
     func coinUpAndDownAnimation(coinCase: CoinCase) {
@@ -107,6 +132,10 @@ class BOHeaderView: UIView {
     
     @objc func earnCoinAction() {
         headerViewDelegate.didTapEarnCoinButton()
+    }
+    
+    @objc func refreshAction() {
+        headerViewDelegate.didTapRefreshButton()
     }
 
 }

@@ -19,8 +19,9 @@ class BOPredictionView: UIView {
     let organizationLabel = BOSmallLabel(frame: .zero)
 
     let predictionBoxStackView = UIStackView()
-    let predictionBoxView = BOPredictionSubView(title: "Tahmin")
-    let oddBoxView = BOPredictionSubView(title: "Oran")
+    let predictionBoxView = BOPredictionSubView(title: "Tahmin", type: .prediction)
+    let oddBoxView = BOPredictionSubView(title: "Oran", type: .odd)
+    let resultBoxView = BOPredictionSubView(title: "Sonuc", type: .result)
     
     @objc let showPredictButton = BOButton(frame: .zero)
 
@@ -54,6 +55,8 @@ class BOPredictionView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 15
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.tertiarySystemBackground.cgColor
         
         stackView.axis = .vertical
         stackView.spacing = 2
@@ -139,19 +142,21 @@ class BOPredictionView: UIView {
         dateLabel.text = (predict["date"] as! String)
         matchLabel.text = (predict["name"] as! String)
         organizationLabel.text = (predict["organization"] as! String)
-        predictionBoxView.contentLabel.text = (predict["prediction"] as! String)
-        oddBoxView.contentLabel.text = (predict["odd"] as! String)
         predictUid = predict["uuid"] as? String
         
-        
-        if (predict["isFree"] as! Bool) {
+        predictionBoxView.set(predict: predict)
+        oddBoxView.set(predict: predict)
+
+        if isOld  {
+            predictionBoxStackView.addArrangedSubview(resultBoxView)
+            resultBoxView.set(predict: predict)
+            
+            layer.borderColor = (predict["isOk"] as! Bool) ? UIColor.systemGreen.cgColor : UIColor.systemRed.cgColor
+
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
             
-        } else if predictBoxIsShowed {
-            showPredictButton.isHidden = true
-            predictionBoxStackView.alpha = 1
-        } else if isOld {
+        } else if predictBoxIsShowed  || (predict["isFree"] as! Bool) {
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
         }

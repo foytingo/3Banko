@@ -24,6 +24,11 @@ class SingleOldPredictVC: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
         configurePredictViews()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.popToRootViewController(animated: true)
+    }
 
     
 

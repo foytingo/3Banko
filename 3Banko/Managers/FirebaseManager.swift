@@ -31,13 +31,14 @@ struct FirebaseManager {
     func getAllPredictions(completion: @escaping ([[String: Any]], Error?) -> Void) {
         var allPredictsArray = [[String: Any]]()
         
-        db.collection("predicts").getDocuments { snapshot, error in
+        db.collection("predicts").order(by: "id", descending: true).getDocuments { snapshot, error in
             if let error = error {
                 completion(allPredictsArray, error)
             } else {
                 for document in snapshot!.documents {
                     allPredictsArray.append(document.data())
                 }
+                allPredictsArray.remove(at: 0)
 
                 completion(allPredictsArray,error)
             }
@@ -87,7 +88,6 @@ struct FirebaseManager {
     }
     
     func updateCoin(uid: String, coinCount: Int, completion: @escaping(Error?) -> Void) {
-        //db.collection("Users").document(uid).updateData(["coinCount": coinCount])
         db.collection("Users").document(uid).updateData(["coinCount": coinCount]) { error in
             if let error = error {
                 completion(error)

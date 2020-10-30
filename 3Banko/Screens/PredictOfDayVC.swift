@@ -67,6 +67,7 @@ class PredictOfDayVC: BODataLoadingViewController {
         showLoadingView()
         FirebaseManager.shared.loadPredictions { predictions, error in
             self.dismissLoadingView()
+
             guard let predictions = predictions else { return }
             self.predictions = predictions
         }
@@ -80,6 +81,8 @@ class PredictOfDayVC: BODataLoadingViewController {
     private func configureHeaderView() {
         view.addSubview(headerView)
         headerView.headerViewDelegate = self
+        headerView.earnCoinButton.isEnabled = false
+        headerView.earnCoinButton.backgroundColor = .systemGray
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -117,7 +120,7 @@ class PredictOfDayVC: BODataLoadingViewController {
                 self.userUid = uid
                 return
             }
-            print("DEBUG: Error: \(error)")
+            self.presentAlertWithOk(message: error.localizedDescription)
         }
     }
     
@@ -125,9 +128,9 @@ class PredictOfDayVC: BODataLoadingViewController {
         let rewardedAd = GADRewardedAd(adUnitID: "ca-app-pub-3940256099942544/5224354917")
         rewardedAd.load(GADRequest()) { error in
             if let error = error {
-                print("DEBUG: Error to load ad: \(error)")
+                self.presentAlertWithOk(message: error.localizedDescription)
             } else {
-                print("DEBUG: Ad load successfully")
+                self.headerView.earnCoinButtonStatus(isActive: true)
             }
         }
         return rewardedAd
@@ -138,6 +141,10 @@ class PredictOfDayVC: BODataLoadingViewController {
 }
 
 extension PredictOfDayVC: BOHeaderViewDelegate {
+    func didTapRefreshButton() {
+        getDailyPredictions()
+    }
+    
     func didTapEarnCoinButton() {
         
         if rewardedAd?.isReady == true {
@@ -183,6 +190,7 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
     /// Tells the delegate that the rewarded ad was presented.
     func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
         print("DEBUG: Rewarded ad presented.")
+        headerView.earnCoinButtonStatus(isActive: false)
     }
     /// Tells the delegate that the rewarded ad was dismissed.
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {

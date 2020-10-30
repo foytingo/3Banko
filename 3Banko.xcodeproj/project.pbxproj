@@ -24,6 +24,9 @@
 		464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */; };
 		464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3B2F254895D500B56BFC /* BOHeaderView.swift */; };
 		4696536725499E91007C2556 /* BOUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4696536625499E91007C2556 /* BOUser.swift */; };
+		4697EF36254C134D00159947 /* BOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4697EF35254C134D00159947 /* BOError.swift */; };
+		4697EF39254C14E500159947 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4697EF38254C14E500159947 /* UIViewController+Ext.swift */; };
+		4697EF3C254C199700159947 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4697EF3B254C199700159947 /* Constants.swift */; };
 		46EE7F88254AD2D60054A473 /* SingleOldPredictVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE7F87254AD2D60054A473 /* SingleOldPredictVC.swift */; };
 		46EE7F8C254AE6A80054A473 /* BODataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */; };
 		F8C45629384E752CDBB90F98 /* Pods_3Banko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */; };
@@ -50,6 +53,9 @@
 		464B3B0125486C4D00B56BFC /* BOPredictionSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubView.swift; sourceTree = "<group>"; };
 		464B3B2F254895D500B56BFC /* BOHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOHeaderView.swift; sourceTree = "<group>"; };
 		4696536625499E91007C2556 /* BOUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOUser.swift; sourceTree = "<group>"; };
+		4697EF35254C134D00159947 /* BOError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOError.swift; sourceTree = "<group>"; };
+		4697EF38254C14E500159947 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		4697EF3B254C199700159947 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		46EE7F87254AD2D60054A473 /* SingleOldPredictVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOldPredictVC.swift; sourceTree = "<group>"; };
 		46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BODataLoadingViewController.swift; sourceTree = "<group>"; };
 		E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3Banko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +114,9 @@
 				46421CAD25496992001772B8 /* Buttons */,
 				46EE7F8A254AE66E0054A473 /* Managers */,
 				46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */,
+				4697EF35254C134D00159947 /* BOError.swift */,
+				4697EF38254C14E500159947 /* UIViewController+Ext.swift */,
+				4697EF3B254C199700159947 /* Constants.swift */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -309,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46421CB0254969B8001772B8 /* FirebaseManager.swift in Sources */,
+				4697EF3C254C199700159947 /* Constants.swift in Sources */,
 				464B3B0225486C4D00B56BFC /* BOPredictionSubView.swift in Sources */,
 				464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */,
 				464B3AF8254859D100B56BFC /* BOLabel.swift in Sources */,
@@ -316,6 +326,8 @@
 				46EE7F88254AD2D60054A473 /* SingleOldPredictVC.swift in Sources */,
 				464B3AFB25485C2200B56BFC /* Prediction.swift in Sources */,
 				4696536725499E91007C2556 /* BOUser.swift in Sources */,
+				4697EF39254C14E500159947 /* UIViewController+Ext.swift in Sources */,
+				4697EF36254C134D00159947 /* BOError.swift in Sources */,
 				464B3B30254895D500B56BFC /* BOHeaderView.swift in Sources */,
 				46421CAB25495A2D001772B8 /* BOButton.swift in Sources */,
 				464B3AE8254850BB00B56BFC /* PredictOfDayVC.swift in Sources */,

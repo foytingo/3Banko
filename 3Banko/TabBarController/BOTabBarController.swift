@@ -20,14 +20,14 @@ class BOTabBarController: UITabBarController {
     private func createPredictOfDayNC() -> UIViewController {
         let predictOfDayVC = PredictOfDayVC()
         
-        predictOfDayVC.tabBarItem = UITabBarItem(title: "Predicts of day", image: UIImage(systemName: "die.face.3.fill"), tag: 0)
+        predictOfDayVC.tabBarItem = UITabBarItem(title: "Gunun Tahminleri", image: UIImage(systemName: "die.face.3.fill"), tag: 0)
         return predictOfDayVC
     }
     
     private func createOldPredictsNC() -> UINavigationController {
         let oldPredictsVC = OldPredictsVC()
-        oldPredictsVC.title = "Old Predicts"
-        oldPredictsVC.tabBarItem = UITabBarItem(title: "Old predicts", image: UIImage(systemName: "clock.fill"), tag: 1)
+        oldPredictsVC.title = "Eski Tahminler"
+        oldPredictsVC.tabBarItem = UITabBarItem(title: "Eski Tahminler", image: UIImage(systemName: "clock.fill"), tag: 1)
         return UINavigationController(rootViewController: oldPredictsVC)
     }
 

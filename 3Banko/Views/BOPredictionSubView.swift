@@ -7,11 +7,17 @@
 
 import UIKit
 
+enum SubViewType {
+    case prediction, odd, result
+}
+
 class BOPredictionSubView: UIView {
 
     let stackView = UIStackView()
     let titleLabel = BOSmallLabel(frame: .zero)
     let contentLabel = BOSmallLabel(frame: .zero)
+    
+    var type: SubViewType?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,9 +29,10 @@ class BOPredictionSubView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String) {
+    init(title: String, type: SubViewType) {
         super.init(frame: .zero)
         titleLabel.text = title
+        self.type = type
         configure()
         layoutUI()
     }
@@ -51,9 +58,21 @@ class BOPredictionSubView: UIView {
 
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-
-            
         ])
+    }
+    
+    
+    func set(predict: [String: Any]) {
+        switch type {
+        case .prediction:
+            contentLabel.text = (predict["prediction"] as! String)
+        case .odd:
+            contentLabel.text = (predict["odd"] as! String)
+        case .result:
+            contentLabel.text = (predict["result"] as! String)
+        case .none:
+            contentLabel.text = "-"
+        }
     }
     
     
