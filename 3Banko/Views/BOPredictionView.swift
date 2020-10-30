@@ -32,7 +32,7 @@ class BOPredictionView: UIView {
     var predictUid: String? {
         didSet {
             guard let predictUid = predictUid else { return }
-            predictBoxIsShowed = defaults.bool(forKey: predictUid)
+            predictBoxIsShowed = false//defaults.bool(forKey: predictUid)
             print("DEBUG: predict \(predictUid) loaded as \(predictBoxIsShowed)")
         }
     }
@@ -93,8 +93,6 @@ class BOPredictionView: UIView {
                 self.showPredictButton.isHidden = true
                 self.showPredictBoxAnimation()
             }
-        } else {
-            print("DEBUG: Present alert with earn coin button and ok button.")
         }
         
     }

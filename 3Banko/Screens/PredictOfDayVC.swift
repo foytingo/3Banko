@@ -7,8 +7,11 @@
 
 import UIKit
 import GoogleMobileAds
+import Network
 
 class PredictOfDayVC: BODataLoadingViewController {
+    
+    let monitor = NWPathMonitor()
     
     let headerView = BOHeaderView(frame: .zero)
     
@@ -18,41 +21,43 @@ class PredictOfDayVC: BODataLoadingViewController {
     let predictThree = BOPredictionView(frame: .zero)
     
     var didEarnCoin = false
+    var rewardedAd: GADRewardedAd?
     
     var predictions: [String: Any]? {
         didSet {
-            let predictionViewArray = [predictOne, predictTwo, predictThree]
-            for (index, predictView) in predictionViewArray.enumerated() {
-                predictView.set(predict: predictions!["predict\(index + 1)"] as! [String : Any], isOld: false)
-            }
             configurePredictViews()
         }
     }
 
-    var rewardedAd: GADRewardedAd?
+    
     var userUid: String? {
         didSet {
-            guard let userUid = userUid else { return}
-            FirebaseManager.shared.getUser(uid: userUid) { user, error in
-                self.user = user
-            }
+            getUserData(userUid: userUid)
         }
     }
+    
+    
     var coinCount: Int = 0 {
         didSet {
             headerView.set(coinCount: coinCount)
         }
     }
+    
+    
     var user: BOUser? {
         didSet {
             guard let user = user else { return }
             self.coinCount = user.coinCount
-            
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let queue = DispatchQueue.global(qos: .background)
+        monitor.start(queue: queue)
+        
         anonymousLogin()
         
         configureViewController()
@@ -61,28 +66,22 @@ class PredictOfDayVC: BODataLoadingViewController {
         getDailyPredictions()
        
         rewardedAd = createAndLoadRewardedAd()
+        
     }
     
-    private func getDailyPredictions() {
-        showLoadingView()
-        FirebaseManager.shared.loadPredictions { predictions, error in
-            self.dismissLoadingView()
+    
+    func checkConnection() -> Bool {
+        return monitor.currentPath.status == .unsatisfied ? false : true
+    }
 
-            guard let predictions = predictions else { return }
-            self.predictions = predictions
-        }
-    }
-    
     private func configureViewController() {
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)]
         view.backgroundColor = .secondarySystemBackground
     }
+    
     
     private func configureHeaderView() {
         view.addSubview(headerView)
         headerView.headerViewDelegate = self
-        headerView.earnCoinButton.isEnabled = false
-        headerView.earnCoinButton.backgroundColor = .systemGray
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -91,21 +90,21 @@ class PredictOfDayVC: BODataLoadingViewController {
         ])
     }
     
+    
     private func configurePredictViews() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.distribution = .fillEqually
         
         let predictionViewArray = [predictOne, predictTwo, predictThree]
-        for predictView in predictionViewArray {
+        for (index,predictView) in predictionViewArray.enumerated() {
             stackView.addArrangedSubview(predictView)
             predictView.predictViewDelegate = self
+            predictView.set(predict: predictions!["predict\(index + 1)"] as! [String : Any], isOld: false)
         }
         
         view.addSubview(stackView)
-        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -114,65 +113,94 @@ class PredictOfDayVC: BODataLoadingViewController {
         ])
     }
     
-    func anonymousLogin() {
+    
+    private func anonymousLogin() {
         FirebaseManager.shared.authAnonymous { (uid, error) in
-            guard let error = error else {
+            guard let _ = error else {
                 self.userUid = uid
                 return
             }
-            self.presentAlertWithOk(message: error.localizedDescription)
+            self.presentAlertWithOk(message: BOError.internetError.rawValue)
         }
     }
     
-    func createAndLoadRewardedAd() -> GADRewardedAd? {
-        let rewardedAd = GADRewardedAd(adUnitID: "ca-app-pub-3940256099942544/5224354917")
+    
+    private func getUserData(userUid: String?) {
+        guard let userUid = userUid else { return }
+        FirebaseManager.shared.getUser(uid: userUid) { user, error in
+            guard let _ = error else {
+                self.user = user
+                return
+            }
+            self.presentAlertWithOk(message: BOError.internetError.rawValue)
+        }
+    }
+    
+    
+    private func getDailyPredictions() {
+        showLoadingView()
+        FirebaseManager.shared.loadPredictions { predictions, error in
+            self.dismissLoadingView()
+            if let _ = error {
+                self.presentAlertWithOk(message: BOError.internetError.rawValue)
+            } else {
+                guard let predictions = predictions else {
+                    self.presentAlertWithOk(message: BOError.cantLoadPredictions.rawValue)
+                    return
+                }
+                self.predictions = predictions
+            }
+        }
+    }
+
+    
+    private func createAndLoadRewardedAd() -> GADRewardedAd? {
+        let rewardedAd = GADRewardedAd(adUnitID: AdmobId.testId)
         rewardedAd.load(GADRequest()) { error in
-            if let error = error {
-                self.presentAlertWithOk(message: error.localizedDescription)
+            if let _ = error {
+                self.presentAlertWithOk(message: BOError.internetError.rawValue)
             } else {
                 self.headerView.earnCoinButtonStatus(isActive: true)
             }
         }
         return rewardedAd
     }
-    
-    
+
     
 }
 
+
 extension PredictOfDayVC: BOHeaderViewDelegate {
     func didTapRefreshButton() {
+        rewardedAd = createAndLoadRewardedAd()
         getDailyPredictions()
     }
     
+    
     func didTapEarnCoinButton() {
-        
-        if rewardedAd?.isReady == true {
+        if checkConnection() &&  rewardedAd?.isReady == true  {
             rewardedAd?.present(fromRootViewController: self, delegate:self)
+        } else {
+            presentAlertWithOk(message: BOError.cantPresentAd.rawValue)
         }
     }
-    
 }
+
 
 extension PredictOfDayVC: BOPredictionViewDelegate {
     func didTapShowPredictButton() -> Bool {
         if coinCount < 1 {
+            self.presentAlertWithOk(message: BOError.haveNotEnoughCoun.rawValue)
             return false
         } else {
             self.coinCount -= 1
-            
-            self.headerView.coinUpAndDownAnimation(coinCase: .down)
-            
             FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
-                if let error = error {
-                    print("DEBUG: \(error)")
-                } else {
-                    print("DEBUG: Coin successfully removed")
-                    print("DEBUG: Show coin remove animation")
-                    
+                if let _ = error {
+                    self.coinCount += 1
+                    self.presentAlertWithOk(message: BOError.cantUpdateCoinWithDown.rawValue)
                 }
             }
-
+            self.headerView.coinUpAndDownAnimation(coinCase: .down)
             return true
         }
     }
@@ -182,39 +210,33 @@ extension PredictOfDayVC: BOPredictionViewDelegate {
 }
 
 extension PredictOfDayVC: GADRewardedAdDelegate {
-    /// Tells the delegate that the user earned a reward.
     func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
         didEarnCoin = true
-
+        
     }
-    /// Tells the delegate that the rewarded ad was presented.
+    
     func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
-        print("DEBUG: Rewarded ad presented.")
         headerView.earnCoinButtonStatus(isActive: false)
     }
-    /// Tells the delegate that the rewarded ad was dismissed.
+
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
-        print("DEBUG: Rewarded ad dismissed.")
-        self.rewardedAd = createAndLoadRewardedAd()
-        print("DEBUG: Show coin add animation")
         if didEarnCoin {
             self.coinCount += 1
             FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
-                if let error = error {
-                    print("DEBUG: \(error)")
-                } else {
-                    print("DEBUG: Coin successfully added")
+                if let _ = error {
+                    self.coinCount -= 1
+                    self.presentAlertWithOk(message: BOError.cantUpdateCoinWithUp.rawValue)
                 }
             }
             self.headerView.coinUpAndDownAnimation(coinCase: .up)
             didEarnCoin = false
         }
-        
+        self.rewardedAd = createAndLoadRewardedAd()
         
     }
-    /// Tells the delegate that the rewarded ad failed to present.
+    
     func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
-        print("DEBUG: Rewarded ad failed to present.")
+        self.presentAlertWithOk(message: "kikiki")
     }
     
     

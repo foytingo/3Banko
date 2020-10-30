@@ -113,10 +113,9 @@
 				464B3B2C2548956200B56BFC /* Model */,
 				46421CAD25496992001772B8 /* Buttons */,
 				46EE7F8A254AE66E0054A473 /* Managers */,
-				46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */,
-				4697EF35254C134D00159947 /* BOError.swift */,
-				4697EF38254C14E500159947 /* UIViewController+Ext.swift */,
-				4697EF3B254C199700159947 /* Constants.swift */,
+				4697EF40254C31C600159947 /* ViewControllers */,
+				4697EF3E254C31BD00159947 /* Helpers */,
+				4697EF41254C31CD00159947 /* Extensions */,
 			);
 			path = 3Banko;
 			sourceTree = "<group>";
@@ -176,6 +175,31 @@
 				464B3ADB25484D7300B56BFC /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4697EF3E254C31BD00159947 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4697EF35254C134D00159947 /* BOError.swift */,
+				4697EF3B254C199700159947 /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4697EF40254C31C600159947 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4697EF41254C31CD00159947 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4697EF38254C14E500159947 /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		46EE7F8A254AE66E0054A473 /* Managers */ = {
