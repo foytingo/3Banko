@@ -69,12 +69,12 @@ class BOHeaderView: UIView {
             coinImageView.heightAnchor.constraint(equalToConstant: 30),
             
             coinCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            coinCountLabel.leadingAnchor.constraint(equalTo: coinImageView.trailingAnchor, constant: 14),
+            coinCountLabel.leadingAnchor.constraint(equalTo: coinImageView.trailingAnchor, constant: 8),
             
             arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            arrowImageView.leadingAnchor.constraint(equalTo: coinCountLabel.trailingAnchor, constant: 10),
-            arrowImageView.widthAnchor.constraint(equalToConstant: 20),
-            arrowImageView.heightAnchor.constraint(equalToConstant: 20),
+            arrowImageView.leadingAnchor.constraint(equalTo: coinCountLabel.trailingAnchor, constant: 5),
+            arrowImageView.widthAnchor.constraint(equalToConstant: 15),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 15),
             
             refreshButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             refreshButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),

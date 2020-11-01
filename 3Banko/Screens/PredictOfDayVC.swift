@@ -33,12 +33,14 @@ class PredictOfDayVC: BODataLoadingViewController {
     var userUid: String? {
         didSet {
             getUserData(userUid: userUid)
+            print("DEBUG: User uid Setted")
         }
     }
     
     
     var coinCount: Int = 0 {
         didSet {
+            print("DEBUG: Coin count setted")
             headerView.set(coinCount: coinCount)
         }
     }
@@ -47,6 +49,7 @@ class PredictOfDayVC: BODataLoadingViewController {
     var user: BOUser? {
         didSet {
             guard let user = user else { return }
+            print("DEBUG: User setted")
             self.coinCount = user.coinCount
         }
     }
@@ -127,11 +130,14 @@ class PredictOfDayVC: BODataLoadingViewController {
     
     private func getUserData(userUid: String?) {
         guard let userUid = userUid else { return }
+        print("DEBUG: userUid: \(userUid)")
         FirebaseManager.shared.getUser(uid: userUid) { user, error in
             guard let _ = error else {
                 self.user = user
+                print("DEBUG: get user data success")
                 return
             }
+            print("DEBUG: get user data not success")
             self.presentAlertWithOk(message: BOError.internetError.rawValue)
         }
     }
@@ -223,7 +229,7 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
         if didEarnCoin {
             self.coinCount += 1
             FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
-                if let _ = error {
+                if let error = error {
                     self.coinCount -= 1
                     self.presentAlertWithOk(message: BOError.cantUpdateCoinWithUp.rawValue)
                 }

@@ -14,8 +14,8 @@ enum SubViewType {
 class BOPredictionSubView: UIView {
 
     let stackView = UIStackView()
-    let titleLabel = BOSmallLabel(frame: .zero)
-    let contentLabel = BOSmallLabel(frame: .zero)
+    let titleLabel = BOPredictionSubBoxLabel(fontSize: 14, weight: .regular, color: .systemGray)
+    let contentLabel = BOPredictionSubBoxLabel(fontSize: 17, weight: .regular, color: .label)
     
     var type: SubViewType?
     
@@ -55,8 +55,9 @@ class BOPredictionSubView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            //stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
@@ -66,6 +67,7 @@ class BOPredictionSubView: UIView {
         switch type {
         case .prediction:
             contentLabel.text = (predict["prediction"] as! String)
+            
         case .odd:
             contentLabel.text = (predict["odd"] as! String)
         case .result:

@@ -12,7 +12,9 @@ protocol BOPredictionViewDelegate: class {
 }
 
 class BOPredictionView: UIView {
-
+    
+    let statusImageView = UIImageView()
+    
     let stackView = UIStackView()
     let dateLabel = BOSmallLabel(frame: .zero)
     let matchLabel = BOLabel(frame: .zero)
@@ -55,8 +57,7 @@ class BOPredictionView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 15
-        layer.borderWidth = 0.5
-        layer.borderColor = UIColor.tertiarySystemBackground.cgColor
+        
         
         stackView.axis = .vertical
         stackView.spacing = 2
@@ -132,6 +133,20 @@ class BOPredictionView: UIView {
             showPredictButton.widthAnchor.constraint(equalToConstant: 250),
             showPredictButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+        
+    }
+    
+    private func configureStatusImage(isOk: Bool) {
+        addSubview(statusImageView)
+        statusImageView.image = isOk ? UIImage(named: "ok") : UIImage(named: "notOk")
+        statusImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            statusImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            statusImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            statusImageView.widthAnchor.constraint(equalToConstant: 20),
+            statusImageView.heightAnchor.constraint(equalToConstant: 20)
+        ])
     }
     
     
@@ -148,11 +163,9 @@ class BOPredictionView: UIView {
         if isOld  {
             predictionBoxStackView.addArrangedSubview(resultBoxView)
             resultBoxView.set(predict: predict)
-            
-            layer.borderColor = (predict["isOk"] as! Bool) ? UIColor.systemGreen.cgColor : UIColor.systemRed.cgColor
-
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
+            configureStatusImage(isOk: predict["isOk"] as! Bool)
             
         } else if predictBoxIsShowed  || (predict["isFree"] as! Bool) {
             showPredictButton.isHidden = true
