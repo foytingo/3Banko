@@ -53,7 +53,7 @@ class BOHeaderView: UIView {
         
         refreshButton.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
         refreshButton.layer.cornerRadius = 10
-        refreshButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        refreshButton.backgroundColor = Color.BOGreen
         refreshButton.tintColor = .white
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
         
@@ -95,7 +95,7 @@ class BOHeaderView: UIView {
     func earnCoinButtonStatus(isActive: Bool) {
         if isActive {
             earnCoinButton.isEnabled = true
-            earnCoinButton.backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+            earnCoinButton.backgroundColor = Color.BOGreen
         } else {
             earnCoinButton.isEnabled = false
             earnCoinButton.backgroundColor = .systemGray

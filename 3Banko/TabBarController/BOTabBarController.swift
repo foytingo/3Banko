@@ -12,7 +12,7 @@ class BOTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UITabBar.appearance().tintColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        UITabBar.appearance().tintColor = Color.BOGreen
         viewControllers = [createPredictOfDayNC(), createOldPredictsNC()]
     }
     

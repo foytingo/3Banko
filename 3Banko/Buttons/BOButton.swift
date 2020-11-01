@@ -28,7 +28,7 @@ class BOButton: UIButton {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        backgroundColor = Color.BOGreen
         setTitle("Tahmini Goster", for: .normal)
         setImage(UIImage(named: "coins"), for: .normal)
         layer.cornerRadius = 10

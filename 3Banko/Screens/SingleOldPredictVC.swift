@@ -19,11 +19,10 @@ class SingleOldPredictVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
+        configure()
         configurePredictViews()
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -31,7 +30,13 @@ class SingleOldPredictVC: UIViewController {
     }
 
     
-
+    private func configure() {
+        view.backgroundColor = .secondarySystemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = Color.BOGreen
+    }
+    
+    
     private func configurePredictViews() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -40,6 +45,7 @@ class SingleOldPredictVC: UIViewController {
         stackView.distribution = .fillEqually
         
         let predictionViewArray = [predictOne, predictTwo, predictThree]
+        
         for (index, predictView) in predictionViewArray.enumerated() {
             stackView.addArrangedSubview(predictView)
             predictView.set(predict: predict!["predict\(index + 1)"] as! [String : Any], isOld: true)
