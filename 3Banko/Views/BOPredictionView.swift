@@ -13,6 +13,8 @@ protocol BOPredictionViewDelegate: class {
 
 class BOPredictionView: UIView {
     
+    let defaults = UserDefaults.standard
+    
     let statusImageView = UIImageView()
     
     let stackView = UIStackView()
@@ -23,30 +25,28 @@ class BOPredictionView: UIView {
     let predictionBoxStackView = UIStackView()
     let predictionBoxView = BOPredictionSubView(title: "Tahmin", type: .prediction)
     let oddBoxView = BOPredictionSubView(title: "Oran", type: .odd)
-    let resultBoxView = BOPredictionSubView(title: "Sonuc", type: .result)
+    let resultBoxView = BOPredictionSubView(title: "Sonuç", type: .result)
     
     @objc let showPredictButton = BOButton(frame: .zero)
 
-    
     weak var predictViewDelegate: BOPredictionViewDelegate!
 
     var predictBoxIsShowed: Bool = false
+    
     var predictUid: String? {
         didSet {
             guard let predictUid = predictUid else { return }
-            predictBoxIsShowed = false//defaults.bool(forKey: predictUid)
-            print("DEBUG: predict \(predictUid) loaded as \(predictBoxIsShowed)")
+            predictBoxIsShowed = defaults.bool(forKey: predictUid)
         }
     }
-    
-    let defaults = UserDefaults.standard
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         configure()
         layoutUI()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -58,27 +58,37 @@ class BOPredictionView: UIView {
         backgroundColor = .tertiarySystemBackground
         layer.cornerRadius = 15
         
+        configureSubBoxStackView()
+        configureLabelStackView()
         
+        showPredictButton.addTarget(self, action: #selector(showPredictButtonAction), for: .touchUpInside)
+    }
+    
+    
+    private func configureLabelStackView() {
         stackView.axis = .vertical
         stackView.spacing = 2
         stackView.distribution = .fillEqually
 
-        predictionBoxStackView.axis = .horizontal
-        predictionBoxStackView.spacing = 20
-        predictionBoxStackView.distribution = .fillEqually
- 
-        let boxArray = [predictionBoxView, oddBoxView]
-        for box in boxArray {
-            predictionBoxStackView.addArrangedSubview(box)
-        }
-        
         let labelArray = [dateLabel, matchLabel, organizationLabel]
         for label in labelArray {
             stackView.addArrangedSubview(label)
         }
-        
-        showPredictButton.addTarget(self, action: #selector(showPredictButtonAction), for: .touchUpInside)
     }
+    
+    
+    private func configureSubBoxStackView() {
+        predictionBoxStackView.axis = .horizontal
+        predictionBoxStackView.spacing = 20
+        predictionBoxStackView.distribution = .fillEqually
+        predictionBoxStackView.alpha = 0
+        
+        let boxArray = [predictionBoxView, oddBoxView]
+        for box in boxArray {
+            predictionBoxStackView.addArrangedSubview(box)
+        }
+    }
+    
     
     @objc func showPredictButtonAction() {
         if self.predictViewDelegate.didTapShowPredictButton() {
@@ -86,7 +96,6 @@ class BOPredictionView: UIView {
             
             predictBoxIsShowed = true
             defaults.set(predictBoxIsShowed, forKey: predictUid)
-            print("DEBUG: predictBoxIsshowed saved as \(predictBoxIsShowed)")
             
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: {
                 self.showPredictButton.alpha = 0
@@ -95,8 +104,9 @@ class BOPredictionView: UIView {
                 self.showPredictBoxAnimation()
             }
         }
-        
     }
+    
+    
     
     @objc func showPredictBoxAnimation() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
@@ -104,12 +114,12 @@ class BOPredictionView: UIView {
         })
     }
     
+    
     private func layoutUI() {
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
@@ -117,8 +127,8 @@ class BOPredictionView: UIView {
         ])
         
         addSubview(predictionBoxStackView)
-        predictionBoxStackView.alpha = 0
         predictionBoxStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             predictionBoxStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
             predictionBoxStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
@@ -133,22 +143,13 @@ class BOPredictionView: UIView {
             showPredictButton.widthAnchor.constraint(equalToConstant: 250),
             showPredictButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
     }
     
-    private func configureStatusImage(isOk: Bool) {
-        addSubview(statusImageView)
-        statusImageView.image = isOk ? UIImage(named: "ok") : UIImage(named: "notOk")
-        statusImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            statusImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            statusImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            statusImageView.widthAnchor.constraint(equalToConstant: 20),
-            statusImageView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-    }
     
+    private func setBorderColor(isOk: Bool) {
+        layer.borderWidth = 2
+        layer.borderColor = isOk ? Color.BOGreen.cgColor : Color.BORed.cgColor
+    }
     
     
     func set(predict: [String: Any], isOld: Bool) {
@@ -165,14 +166,12 @@ class BOPredictionView: UIView {
             resultBoxView.set(predict: predict)
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
-            configureStatusImage(isOk: predict["isOk"] as! Bool)
+            setBorderColor(isOk: (predict["isOk"] as! Bool))
             
         } else if predictBoxIsShowed  || (predict["isFree"] as! Bool) {
             showPredictButton.isHidden = true
             predictionBoxStackView.alpha = 1
         }
     }
-    
-
 }
 

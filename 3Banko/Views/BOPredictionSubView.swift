@@ -25,9 +25,11 @@ class BOPredictionSubView: UIView {
         layoutUI()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     init(title: String, type: SubViewType) {
         super.init(frame: .zero)
@@ -36,6 +38,7 @@ class BOPredictionSubView: UIView {
         configure()
         layoutUI()
     }
+    
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +53,7 @@ class BOPredictionSubView: UIView {
         stackView.addArrangedSubview(contentLabel)
     }
     
+    
     private func layoutUI() {
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +61,6 @@ class BOPredictionSubView: UIView {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            //stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
@@ -67,7 +70,6 @@ class BOPredictionSubView: UIView {
         switch type {
         case .prediction:
             contentLabel.text = (predict["prediction"] as! String)
-            
         case .odd:
             contentLabel.text = (predict["odd"] as! String)
         case .result:

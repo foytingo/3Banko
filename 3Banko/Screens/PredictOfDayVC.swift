@@ -236,7 +236,7 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
     }
     
     func rewardedAd(_ rewardedAd: GADRewardedAd, didFailToPresentWithError error: Error) {
-        self.presentAlertWithOk(message: "kikiki")
+        self.presentAlertWithOk(message: BOError.cantPresentAd.rawValue)
     }
     
     

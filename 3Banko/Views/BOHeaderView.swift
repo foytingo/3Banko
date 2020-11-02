@@ -32,9 +32,11 @@ class BOHeaderView: UIView {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +64,7 @@ class BOHeaderView: UIView {
         addSubview(arrowImageView)
         addSubview(earnCoinButton)
         addSubview(refreshButton)
+        
         NSLayoutConstraint.activate([
             coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             coinImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -88,9 +91,11 @@ class BOHeaderView: UIView {
         ])
     }
     
+    
     func set(coinCount: Int) {
         coinCountLabel.text = "Jeton: \(coinCount)"
     }
+    
     
     func earnCoinButtonStatus(isActive: Bool) {
         if isActive {
@@ -102,16 +107,17 @@ class BOHeaderView: UIView {
         }
     }
     
+    
     func coinUpAndDownAnimation(coinCase: CoinCase) {
-        var labelColor: UIColor = .systemGreen
+        var labelColor: UIColor = Color.BOGreen
         
         switch coinCase {
         case .up:
             arrowImageView.image = UIImage(named: "upArrow")
-            labelColor = .systemGreen
+            labelColor = Color.BOGreen
         case .down:
             arrowImageView.image = UIImage(named: "downArrow")
-            labelColor = .systemRed
+            labelColor = Color.BORed
         }
         
         UIView.animate(withDuration: 0.25, delay: 0.125, options: [.curveEaseInOut]) {

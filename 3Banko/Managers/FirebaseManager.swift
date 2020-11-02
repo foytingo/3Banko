@@ -28,6 +28,7 @@ struct FirebaseManager {
         }
     }
     
+    
     func getAllPredictions(completion: @escaping ([[String: Any]], Error?) -> Void) {
         var allPredictsArray = [[String: Any]]()
         
@@ -59,6 +60,7 @@ struct FirebaseManager {
         }
     }
     
+    
     func firstLaunchOptions(completion: @escaping(Error?)-> Void) {
         Auth.auth().signInAnonymously { authResult, error in
             if let error = error {
@@ -69,6 +71,7 @@ struct FirebaseManager {
             }
         }
     }
+    
     
     func getUser(uid: String, completion: @escaping(BOUser?,Error?) -> Void) {
         db.collection("Users").document(uid).addSnapshotListener { (snapshot, error) in
@@ -83,9 +86,9 @@ struct FirebaseManager {
                 let user = BOUser(uid: uid, coinCount: coinCount, isPaidUser: isPaidUser)
                 completion(user,error)
             }
-            
         }
     }
+    
     
     func updateCoin(uid: String, coinCount: Int, completion: @escaping(Error?) -> Void) {
         db.collection("Users").document(uid).updateData(["coinCount": coinCount]) { error in
@@ -95,8 +98,6 @@ struct FirebaseManager {
               completion(nil)
             }
         }
-        
-        
     }
     
     

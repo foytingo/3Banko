@@ -14,9 +14,11 @@ class BOPredictionSubBoxLabel: UILabel {
         configure()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     init(fontSize: CGFloat, weight: UIFont.Weight, color: UIColor) {
         super.init(frame: .zero)
@@ -25,16 +27,14 @@ class BOPredictionSubBoxLabel: UILabel {
         textColor = color
     }
     
+    
     private func configure() {
         textAlignment = .center
-
-
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         numberOfLines = 0
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
-        
     }
 
 }

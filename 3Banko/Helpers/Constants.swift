@@ -9,7 +9,7 @@ import UIKit
 
 enum Color {
     static let BOGreen = UIColor(red: 0.03, green: 0.46, blue: 0.44, alpha: 1.00)
-    static let BORed: UIColor = .systemRed
+    static let BORed: UIColor = UIColor(red: 0.73, green: 0.13, blue: 0.02, alpha: 1.00)
 }
 
 enum AdmobId {

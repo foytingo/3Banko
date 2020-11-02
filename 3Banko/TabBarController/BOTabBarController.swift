@@ -11,7 +11,7 @@ class BOTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         UITabBar.appearance().tintColor = Color.BOGreen
         viewControllers = [createPredictOfDayNC(), createOldPredictsNC()]
     }
@@ -19,10 +19,10 @@ class BOTabBarController: UITabBarController {
 
     private func createPredictOfDayNC() -> UIViewController {
         let predictOfDayVC = PredictOfDayVC()
-        
-        predictOfDayVC.tabBarItem = UITabBarItem(title: "Gunun Tahminleri", image: UIImage(systemName: "die.face.3.fill"), tag: 0)
+        predictOfDayVC.tabBarItem = UITabBarItem(title: "Günün Tahminleri", image: UIImage(systemName: "die.face.3.fill"), tag: 0)
         return predictOfDayVC
     }
+    
     
     private func createOldPredictsNC() -> UINavigationController {
         let oldPredictsVC = OldPredictsVC()
