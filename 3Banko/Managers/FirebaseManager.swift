@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseAuth
 
 struct FirebaseManager {
     
@@ -47,29 +48,25 @@ struct FirebaseManager {
     }
     
     
-    func authAnonymous(completion: @escaping(String, Error?) -> Void) {
-        var uid = ""
+    func authAnonymous(completion: @escaping(Error?) -> Void) {
         Auth.auth().signInAnonymously { authResult, error in
             if let error = error {
-                completion(uid, error)
+                completion(error)
             } else {
-                guard let user = authResult?.user else { return }
-                uid = user.uid
-                completion(uid,error)
+                completion(nil)
             }
         }
     }
     
     
-    func firstLaunchOptions(completion: @escaping(Error?)-> Void) {
-        Auth.auth().signInAnonymously { authResult, error in
-            if let error = error {
-                completion(error)
-            } else {
-                guard let user = authResult?.user else { return }
-                db.collection("Users").document(user.uid).setData(["userUid" : user.uid, "coinCount" : 5, "isPaidUser": false])
-            }
-        }
+    func getSingedUserUid() -> String? {
+        let uid = Auth.auth().currentUser?.uid
+        return uid
+    }
+    
+    
+    func firstLaunchOption(with userUid: String, completion: @escaping(Error?)-> Void) {
+        db.collection("Users").document(userUid).setData(["userUid" : userUid, "coinCount" : 5, "isPaidUser": false], completion: completion)
     }
     
     
@@ -90,7 +87,9 @@ struct FirebaseManager {
     }
     
     
-    func updateCoin(uid: String, coinCount: Int, completion: @escaping(Error?) -> Void) {
+    func updateCoin(uid: String?, coinCount: Int, completion: @escaping(Error?) -> Void) {
+        guard let uid = uid else { return }
+        
         db.collection("Users").document(uid).updateData(["coinCount": coinCount]) { error in
             if let error = error {
                 completion(error)

@@ -13,24 +13,39 @@ import GoogleMobileAds
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if launchedBefore {
-            print("DEBUG: Not first launch.")
-        } else {
-            print("DEBUG: First launch")
-            FirebaseManager.shared.firstLaunchOptions { (error) in
-                if let error = error {
-                    print(error)
+        
+        FirebaseManager.shared.authAnonymous { (error) in
+            if let error = error {
+                print("DEBUG: AuthError \(error)")
+            } else {
+                guard let userUid = FirebaseManager.shared.getSingedUserUid() else {
+                    print("DEBUG: UserUid alinamadi.")
+                    return
+                }
+                
+                if launchedBefore {
+                    print("DEBUG: Daha once acildi userIUD: \(userUid)")
+                } else {
+                    print("DEBUG: Ilk defa acildi ve user document olsuturuldu")
+                    
+                    FirebaseManager.shared.firstLaunchOption(with: userUid) { error in
+                        if let error = error {
+                            print("DEBUG: Error first launc option \(error)")
+                        } else {
+                            print("DEBUG: All setup Complete and ready. Launced before setted true")
+                            UserDefaults.standard.set(true, forKey: "launchedBefore")
+                        }
+                    }
                 }
             }
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         
+
         return true
     }
     

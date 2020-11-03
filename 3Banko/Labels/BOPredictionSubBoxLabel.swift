@@ -23,6 +23,7 @@ class BOPredictionSubBoxLabel: UILabel {
     init(fontSize: CGFloat, weight: UIFont.Weight, color: UIColor) {
         super.init(frame: .zero)
         configure()
+        let fontSize: CGFloat = DeviceTypes.isiPhone8orSE2Standard || DeviceTypes.isiPhone8orSE2Zoomed ? fontSize - 2 : fontSize
         font = UIFont.systemFont(ofSize: fontSize, weight: weight)
         textColor = color
     }

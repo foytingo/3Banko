@@ -118,12 +118,14 @@ class BOPredictionView: UIView {
     private func layoutUI() {
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
+        let heightConstraint: CGFloat = DeviceTypes.isiPhone8orSE2Standard || DeviceTypes.isiPhone8orSE2Zoomed ? 60 : 80
+        
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            stackView.heightAnchor.constraint(equalToConstant: 80)
+            stackView.heightAnchor.constraint(equalToConstant: heightConstraint)
         ])
         
         addSubview(predictionBoxStackView)

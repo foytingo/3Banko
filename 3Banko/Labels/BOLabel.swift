@@ -21,8 +21,9 @@ class BOLabel: UILabel {
     
     
     private func configure() {
+        let fontSize: CGFloat = DeviceTypes.isiPhone8orSE2Standard || DeviceTypes.isiPhone8orSE2Zoomed ? 18 : 22
         textAlignment = .center
-        font = UIFont.systemFont(ofSize: 22, weight: .regular)
+        font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
         textColor = .label
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9

@@ -28,14 +28,13 @@ class PredictOfDayVC: BODataLoadingViewController {
             configurePredictViews()
         }
     }
-
+    
     
     var userUid: String? {
         didSet {
             getUserData(userUid: userUid)
         }
     }
-    
     
     var coinCount: Int = 0 {
         didSet {
@@ -51,20 +50,23 @@ class PredictOfDayVC: BODataLoadingViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userUid = FirebaseManager.shared.getSingedUserUid()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
-        
-        anonymousLogin()
-        
+
         configureViewController()
         configureHeaderView()
         
         getDailyPredictions()
-       
+        
         rewardedAd = createAndLoadRewardedAd()
         
     }
@@ -73,7 +75,8 @@ class PredictOfDayVC: BODataLoadingViewController {
     func checkConnection() -> Bool {
         return monitor.currentPath.status == .unsatisfied ? false : true
     }
-
+    
+    
     private func configureViewController() {
         view.backgroundColor = .secondarySystemBackground
     }
@@ -114,17 +117,6 @@ class PredictOfDayVC: BODataLoadingViewController {
     }
     
     
-    private func anonymousLogin() {
-        FirebaseManager.shared.authAnonymous { (uid, error) in
-            guard let _ = error else {
-                self.userUid = uid
-                return
-            }
-            self.presentAlertWithOk(message: BOError.internetError.rawValue)
-        }
-    }
-    
-    
     private func getUserData(userUid: String?) {
         guard let userUid = userUid else { return }
         FirebaseManager.shared.getUser(uid: userUid) { user, error in
@@ -152,7 +144,7 @@ class PredictOfDayVC: BODataLoadingViewController {
             }
         }
     }
-
+    
     
     private func createAndLoadRewardedAd() -> GADRewardedAd? {
         let rewardedAd = GADRewardedAd(adUnitID: AdmobId.testId)
@@ -165,7 +157,7 @@ class PredictOfDayVC: BODataLoadingViewController {
         }
         return rewardedAd
     }
-
+    
     
 }
 
@@ -204,9 +196,9 @@ extension PredictOfDayVC: BOPredictionViewDelegate {
             return true
         }
     }
-
     
-
+    
+    
 }
 
 extension PredictOfDayVC: GADRewardedAdDelegate {
@@ -218,11 +210,11 @@ extension PredictOfDayVC: GADRewardedAdDelegate {
     func rewardedAdDidPresent(_ rewardedAd: GADRewardedAd) {
         headerView.earnCoinButtonStatus(isActive: false)
     }
-
+    
     func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
         if didEarnCoin {
             self.coinCount += 1
-            FirebaseManager.shared.updateCoin(uid: userUid!, coinCount: coinCount) { (error) in
+            FirebaseManager.shared.updateCoin(uid: userUid, coinCount: coinCount) { (error) in
                 if let _ = error {
                     self.coinCount -= 1
                     self.presentAlertWithOk(message: BOError.cantUpdateCoinWithUp.rawValue)
