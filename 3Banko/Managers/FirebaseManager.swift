@@ -60,8 +60,7 @@ struct FirebaseManager {
     
     
     func getSingedUserUid() -> String? {
-        let uid = Auth.auth().currentUser?.uid
-        return uid
+        return Auth.auth().currentUser?.uid
     }
     
     

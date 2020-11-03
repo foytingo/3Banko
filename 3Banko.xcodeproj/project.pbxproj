@@ -109,13 +109,9 @@
 				464B3ADE25484D7300B56BFC /* Info.plist */,
 				46421CB225496AFC001772B8 /* GoogleService-Info.plist */,
 				464B3B242548954400B56BFC /* Screens */,
-				464B3B262548954F00B56BFC /* Views */,
-				464B3B282548955400B56BFC /* TabBarController */,
-				464B3B2A2548955D00B56BFC /* Labels */,
+				469BCA002551BFAE00EE1585 /* Custom Views */,
 				464B3B2C2548956200B56BFC /* Model */,
-				46421CAD25496992001772B8 /* Buttons */,
 				46EE7F8A254AE66E0054A473 /* Managers */,
-				4697EF40254C31C600159947 /* ViewControllers */,
 				4697EF3E254C31BD00159947 /* Helpers */,
 				4697EF41254C31CD00159947 /* Extensions */,
 			);
@@ -203,6 +199,18 @@
 				4697EF38254C14E500159947 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		469BCA002551BFAE00EE1585 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				464B3B262548954F00B56BFC /* Views */,
+				464B3B282548955400B56BFC /* TabBarController */,
+				464B3B2A2548955D00B56BFC /* Labels */,
+				46421CAD25496992001772B8 /* Buttons */,
+				4697EF40254C31C600159947 /* ViewControllers */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		46EE7F8A254AE66E0054A473 /* Managers */ = {
