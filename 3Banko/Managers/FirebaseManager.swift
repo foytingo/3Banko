@@ -48,12 +48,12 @@ struct FirebaseManager {
     }
     
     
-    func authAnonymous(completion: @escaping(Error?) -> Void) {
+    func authAnonymous(completion: @escaping(String? , Error?) -> Void) {
         Auth.auth().signInAnonymously { authResult, error in
             if let error = error {
-                completion(error)
+                completion(nil,error)
             } else {
-                completion(nil)
+                completion(authResult?.user.uid, error)
             }
         }
     }

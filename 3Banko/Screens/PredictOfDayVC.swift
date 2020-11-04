@@ -32,9 +32,31 @@ class PredictOfDayVC: BODataLoadingViewController {
     
     var userUid: String? {
         didSet {
+            print("DEBUG: userUid setted as \(self.userUid!)")
+            
+            let launcedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            print("DEBUG: Did this app lauch before: \(launcedBefore)")
+            
+            if launcedBefore == false {
+                print("DEBUG: This time is first time.")
+                FirebaseManager.shared.firstLaunchOption(with: userUid!) { error in
+                    if let error = error {
+                        print("DEBUG: First launch option did not complete with error: \(error)")
+                    } else {
+                        print("DEBUG: First launch option completed and launcedBefore setted as true.")
+                        UserDefaults.standard.set(true, forKey: "launchedBefore")
+                    }
+                }
+            } else {
+                print("DEBUG: This time is NOT first time.")
+                
+            }
+            
             getUserData(userUid: userUid)
         }
     }
+    
+    
     
     
     var coinCount: Int = 0 {
@@ -48,29 +70,50 @@ class PredictOfDayVC: BODataLoadingViewController {
         didSet {
             guard let user = user else { return }
             self.coinCount = user.coinCount
+            
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userUid = FirebaseManager.shared.getSingedUserUid()
+
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
-
+        
+        let signedUserUid = FirebaseManager.shared.getSingedUserUid()
+        
+        if signedUserUid == nil {
+            print("DEBUG: Signed user not found. Start auth process.")
+            FirebaseManager.shared.authAnonymous { (userUid, error) in
+                if let error = error {
+                    print("DEBUG: Signed not completed. Error: \(error)")
+                } else {
+                    print("DEBUG: Signed successfully completed. UserUID: \(userUid ?? "This should be userUid.")")
+                    self.userUid = userUid
+                    self.getDailyPredictions()
+                }
+            }
+        } else {
+            print("DEBUG: Signed user was found. UserUID: \(signedUserUid ?? "This should be userUid.")")
+            self.userUid = signedUserUid
+            getDailyPredictions()
+        }
+        
+        
         configureViewController()
         configureHeaderView()
         
-        getDailyPredictions()
+        
         
         rewardedAd = createAndLoadRewardedAd()
         
     }
+
     
     
     func checkConnection() -> Bool {

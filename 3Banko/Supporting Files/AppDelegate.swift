@@ -11,9 +11,26 @@ import GoogleMobileAds
 
 
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+//    var userUid: String? {
+//        didSet {
+//            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//            print("DEBUG: userUid setted as \(userUid!)")
+//            print("DEBUG: launched before: \(launchedBefore)")
+//            if launchedBefore == false {
+//                FirebaseManager.shared.firstLaunchOption(with: userUid!) { error in
+//                    if let error = error {
+//                        print("DEBUG: error first launch option with \(error)")
+//                    } else {
+//                        print("DEBUG: first launch option success and firs launc as true")
+//                        UserDefaults.standard.set(true, forKey: "launchedBefore")
+//                    }
+//                }
+//            }
+//        }
+//    }
     let gcmMessageIDKey = "gcm.foytingo_ID"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -34,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().subscribe(toTopic: "3banko")
         
         Messaging.messaging().delegate = self
+        
         return true
     }
     
@@ -61,12 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+        //if let messageID = userInfo[gcmMessageIDKey] {
+        //    print("Message ID: \(messageID)")
+        //}
         
         // Print full message.
-        print(userInfo)
+        //print(userInfo)
     }
     
     
@@ -82,12 +100,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+        //if let messageID = userInfo[gcmMessageIDKey] {
+        //    print("Message ID: \(messageID)")
+        //}
         
         // Print full message.
-        print(userInfo)
+        //print(userInfo)
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -104,37 +122,44 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
+        // let userInfo = notification.request.content.userInfo
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+        // if let messageID = userInfo[gcmMessageIDKey] {
+        //    print("Message ID: \(messageID)")
+        // }
         
         // Print full message.
-        print(userInfo)
+        // print(userInfo)
         
         // Change this to your preferred presentation option
-        completionHandler([[.banner, .sound]])
+        
+        if #available(iOS 14, *) {
+            completionHandler([.banner, .sound])
+        } else {
+            completionHandler([.alert, .sound])
+        }
+        
+        
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
+        //let userInfo = response.notification.request.content.userInfo
         // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
+        //if let messageID = userInfo[gcmMessageIDKey] {
+        //    print("Message ID: \(messageID)")
+        //}
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print full message.
-        print(userInfo)
+        //print(userInfo)
         
         completionHandler()
     }
@@ -143,14 +168,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 }
 
 extension AppDelegate: MessagingDelegate {
+    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-            print("Firebase registration token: \(String(describing: fcmToken))")
-            
-            let dataDict:[String: String] = ["token": fcmToken ?? ""]
-            NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-            // TODO: If necessary send token to application server.
-            // Note: This callback is fired at each app startup and whenever a new token is generated.
-        }
+        //print("Firebase registration token: \(String(describing: fcmToken))")
+        let dataDict:[String: String] = ["token": fcmToken ]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
+    
 }
