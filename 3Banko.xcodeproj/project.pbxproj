@@ -58,6 +58,7 @@
 		4697EF38254C14E500159947 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		4697EF3B254C199700159947 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		46CC7770254EB89900727B72 /* BOPredictionSubBoxLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOPredictionSubBoxLabel.swift; sourceTree = "<group>"; };
+		46EB17B02552B6E600FD736D /* 3Banko.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = 3Banko.entitlements; sourceTree = "<group>"; };
 		46EE7F87254AD2D60054A473 /* SingleOldPredictVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOldPredictVC.swift; sourceTree = "<group>"; };
 		46EE7F8B254AE6A80054A473 /* BODataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BODataLoadingViewController.swift; sourceTree = "<group>"; };
 		E154B1454315FCED1DA4F6B0 /* Pods_3Banko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_3Banko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +106,7 @@
 		464B3ACF25484D7100B56BFC /* 3Banko */ = {
 			isa = PBXGroup;
 			children = (
+				46EB17B02552B6E600FD736D /* 3Banko.entitlements */,
 				464B3B2E2548956B00B56BFC /* Supporting Files */,
 				464B3ADE25484D7300B56BFC /* Info.plist */,
 				46421CB225496AFC001772B8 /* GoogleService-Info.plist */,
@@ -511,6 +513,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
@@ -520,8 +525,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.foytingo.-Banko";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -531,6 +537,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
@@ -540,8 +549,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.foytingo.-Banko";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

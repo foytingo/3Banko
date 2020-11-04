@@ -36,6 +36,7 @@ class PredictOfDayVC: BODataLoadingViewController {
         }
     }
     
+    
     var coinCount: Int = 0 {
         didSet {
             headerView.set(coinCount: coinCount)

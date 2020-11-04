@@ -9,8 +9,36 @@ import UIKit
 
 class BOTabBarController: UITabBarController {
 
+    var userUid: String? {
+        didSet {
+            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+            
+            if launchedBefore == false {
+                FirebaseManager.shared.firstLaunchOption(with: userUid!) { error in
+                    guard error != nil else {
+                        UserDefaults.standard.set(true, forKey: "launchedBefore")
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        FirebaseManager.shared.authAnonymous { (error) in
+            guard error != nil else {
+                guard let userUid = FirebaseManager.shared.getSingedUserUid() else { return }
+                self.userUid = userUid
+                return
+            }
+
+        }
+        
+        
         
         UITabBar.appearance().tintColor = Color.BOGreen
         viewControllers = [createPredictOfDayNC(), createOldPredictsNC()]
