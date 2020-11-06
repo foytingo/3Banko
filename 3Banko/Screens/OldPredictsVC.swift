@@ -15,13 +15,15 @@ class OldPredictsVC: BODataLoadingViewController {
     
     var allPredictions = [[String: Any]]()
     
+    var days = 30
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureRefreshButton()
         configureNavBar()
         configureTableView()
-        getAllPredicts()
+        getAllPredicts(day: days)
     }
     
     
@@ -41,7 +43,12 @@ class OldPredictsVC: BODataLoadingViewController {
     
     
     @objc func refreshAction() {
-        getAllPredicts()
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
+        days = 30
+        
+        getAllPredicts(day: days)
     }
     
     
@@ -55,9 +62,9 @@ class OldPredictsVC: BODataLoadingViewController {
     }
     
     
-    private func getAllPredicts() {
+    private func getAllPredicts(day: Int) {
         showLoadingView()
-        FirebaseManager.shared.getAllPredictions { predictions, error in
+        FirebaseManager.shared.getAllPredictions(day: day) { predictions, error in
             self.dismissLoadingView()
             guard let _ = error else {
                 self.allPredictions = predictions
@@ -94,5 +101,19 @@ extension OldPredictsVC: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(singleOldPredictVC, animated: true)
     }
     
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+
+        if offsetY > contentHeight - height {
+            let generator = UIImpactFeedbackGenerator(style: .soft)
+            generator.impactOccurred()
+            days += 30
+            self.getAllPredicts(day: days)
+
+        }
+    }
 }
 

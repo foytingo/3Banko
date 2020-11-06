@@ -30,10 +30,10 @@ struct FirebaseManager {
     }
     
     
-    func getAllPredictions(completion: @escaping ([[String: Any]], Error?) -> Void) {
+    func getAllPredictions(day: Int, completion: @escaping ([[String: Any]], Error?) -> Void) {
         var allPredictsArray = [[String: Any]]()
         
-        db.collection("predicts").order(by: "id", descending: true).getDocuments { snapshot, error in
+        db.collection("predicts").order(by: "id", descending: true).limit(to: day).getDocuments { snapshot, error in
             if let error = error {
                 completion(allPredictsArray, error)
             } else {

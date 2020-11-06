@@ -29,7 +29,7 @@ class BOHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        //configure()
     }
     
     
@@ -94,6 +94,7 @@ class BOHeaderView: UIView {
     
     func set(coinCount: Int) {
         coinCountLabel.text = "Jeton: \(coinCount)"
+        configure()
     }
     
     

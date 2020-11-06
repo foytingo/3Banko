@@ -38,10 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         
+
+        
         
         UNUserNotificationCenter.current().delegate = self
         
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        let authOptions: UNAuthorizationOptions = [ .sound]
         UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: {_, _ in })
@@ -51,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().subscribe(toTopic: "3banko")
         
         Messaging.messaging().delegate = self
+        
         
         return true
     }
@@ -138,9 +141,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         // Change this to your preferred presentation option
         
         if #available(iOS 14, *) {
-            completionHandler([.banner, .sound])
+            completionHandler([.sound])
         } else {
-            completionHandler([.alert, .sound])
+            completionHandler([.sound])
         }
         
         
