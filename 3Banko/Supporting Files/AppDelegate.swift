@@ -14,23 +14,7 @@ import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-//    var userUid: String? {
-//        didSet {
-//            let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-//            print("DEBUG: userUid setted as \(userUid!)")
-//            print("DEBUG: launched before: \(launchedBefore)")
-//            if launchedBefore == false {
-//                FirebaseManager.shared.firstLaunchOption(with: userUid!) { error in
-//                    if let error = error {
-//                        print("DEBUG: error first launch option with \(error)")
-//                    } else {
-//                        print("DEBUG: first launch option success and firs launc as true")
-//                        UserDefaults.standard.set(true, forKey: "launchedBefore")
-//                    }
-//                }
-//            }
-//        }
-//    }
+
     let gcmMessageIDKey = "gcm.foytingo_ID"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

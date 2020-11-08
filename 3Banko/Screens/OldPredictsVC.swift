@@ -107,7 +107,7 @@ extension OldPredictsVC: UITableViewDelegate, UITableViewDataSource {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
 
-        if offsetY > contentHeight - height {
+        if offsetY > contentHeight - height && contentHeight > height {
             let generator = UIImpactFeedbackGenerator(style: .soft)
             generator.impactOccurred()
             days += 30

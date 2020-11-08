@@ -8,7 +8,6 @@
 import UIKit
 import GoogleMobileAds
 import Network
-//import Firebase
 import AppTrackingTransparency
 
 class PredictOfDayVC: BODataLoadingViewController {
@@ -35,33 +34,26 @@ class PredictOfDayVC: BODataLoadingViewController {
 
     var userUid: String? {
         didSet {
-            print("DEBUG: Logged userUid as \(self.userUid!)")
             
             let launcedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
             
-            print("DEBUG: Did this app lauch before: \(launcedBefore)")
             
             if launcedBefore == false {
-                print("DEBUG: This time is first time.")
                 FirebaseManager.shared.firstLaunchOption(with: userUid!) { error in
-                    if let error = error {
-                        print("DEBUG: First launch option did not complete with error: \(error)")
+                    if error != nil {
+                        self.presentAlertWithOk(message: BOError.cantPerformFirtsLaunchOptions.rawValue)
                     } else {
-                        print("DEBUG: First launch option completed and launcedBefore setted as true and savedUserUid set as \(self.userUid!)")
                         UserDefaults.standard.set(true, forKey: "launchedBefore")
                         UserDefaults.standard.set(self.userUid!, forKey: "savedUserUid")
-                        print("DEBUG: Start first user data get.")
                         self.getUserData(userUid: self.userUid!)
-                        print("DEBUG: Start geting prediction")
                         self.getDailyPredictions()
                     }
                 }
             } else {
-                print("DEBUG: This time is NOT first time.")
+
                 let savedUserUid = UserDefaults.standard.string(forKey: "savedUserUid")
                 getUserData(userUid: savedUserUid)
-                print("DEBUG: Read savedUserUid:(\(savedUserUid ?? "This should be userUid")) and start get user data")
-                print("DEBUG: Start geting prediction")
+
                 self.getDailyPredictions()
             }
             
@@ -101,39 +93,14 @@ class PredictOfDayVC: BODataLoadingViewController {
         showLoadingView()
         
         FirebaseManager.shared.authAnonymous { userUid, error in
-            print("DEBUG: Start auth process.")
-            if let error = error {
-                print("DEBUG: Signed not completed. Error: \(error)")
+            if error != nil {
+                self.presentAlertWithOk(message: BOError.cantAuthAnonymously.rawValue)
             } else {
-                print("DEBUG: Signed successfully completed. UserUID: \(userUid ?? "This should be userUid.")")
                 self.userUid = userUid
-                //print("DEBUG: Start getDailyPredictions")
-                //self.getDailyPredictions()
+
             }
         }
-        
-        
-//        let signedUserUid = FirebaseManager.shared.getSingedUserUid()
-//
-//        if signedUserUid == nil {
-//            print("DEBUG: Signed user not found. Start auth process.")
-//
-//            FirebaseManager.shared.authAnonymous { (userUid, error) in
-//                if let error = error {
-//                    print("DEBUG: Signed not completed. Error: \(error)")
-//                } else {
-//                    print("DEBUG: Signed successfully completed. UserUID: \(userUid ?? "This should be userUid.")")
-//                    self.userUid = userUid
-//                    print("DEBUG: Start getDailyPredictions")
-//                    self.getDailyPredictions()
-//                }
-//            }
-//        } else {
-//            print("DEBUG: Signed user was found. UserUID: \(signedUserUid ?? "This should be userUid.")")
-//            self.userUid = signedUserUid
-//            print("DEBUG: Start getDailyPredictions")
-//            getDailyPredictions()
-//        }
+
         
         
         configureViewController()
@@ -145,7 +112,6 @@ class PredictOfDayVC: BODataLoadingViewController {
     func requestIDFA() {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
-                print(status.rawValue)
                 self.rewardedAd = self.createAndLoadRewardedAd()
             }
         } else {
@@ -200,10 +166,8 @@ class PredictOfDayVC: BODataLoadingViewController {
     
     
     private func getUserData(userUid: String?) {
- //       DispatchQueue.global(qos: .background).async {
         guard let userUid = userUid else { return }
         FirebaseManager.shared.getUser(uid: userUid) { user, error in
-            print("DEBUG: Getting user data")
             guard let _ = error else {
                 self.user = user
                 
@@ -211,15 +175,12 @@ class PredictOfDayVC: BODataLoadingViewController {
             }
             self.presentAlertWithOk(message: BOError.internetError.rawValue)
         }
-//    }
     }
     
     
     private func getDailyPredictions() {
-       // DispatchQueue.global(qos: .background).async {
             FirebaseManager.shared.loadPredictions { predictions, error in
                 self.dismissLoadingView()
-                print("DEBUG: Getting prediction")
                 if let _ = error {
                     self.presentAlertWithOk(message: BOError.internetError.rawValue)
                 } else {
@@ -230,7 +191,6 @@ class PredictOfDayVC: BODataLoadingViewController {
                     self.predictions = predictions
                 }
             }
-      //  }
 
     }
     
