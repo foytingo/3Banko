@@ -28,10 +28,10 @@ class PredictOfDayVC: BODataLoadingViewController {
         didSet {
             
             configurePredictViews()
-           
+            
         }
     }
-
+    
     var userUid: String? {
         didSet {
             
@@ -50,18 +50,16 @@ class PredictOfDayVC: BODataLoadingViewController {
                     }
                 }
             } else {
-
+                
                 let savedUserUid = UserDefaults.standard.string(forKey: "savedUserUid")
                 getUserData(userUid: savedUserUid)
-
+                
                 self.getDailyPredictions()
             }
             
-
+            
         }
     }
-    
-    
     
     
     var coinCount: Int = 0 {
@@ -80,35 +78,21 @@ class PredictOfDayVC: BODataLoadingViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
+        
         showLoadingView()
-        
-        FirebaseManager.shared.authAnonymous { userUid, error in
-            if error != nil {
-                self.presentAlertWithOk(message: BOError.cantAuthAnonymously.rawValue)
-            } else {
-                self.userUid = userUid
-
-            }
-        }
-
-        
-        
+        requestIDFA()
+        authProcess()
         configureViewController()
         
-        requestIDFA()
-        
     }
-
+    
+    
     func requestIDFA() {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -122,6 +106,29 @@ class PredictOfDayVC: BODataLoadingViewController {
     
     func checkConnection() -> Bool {
         return monitor.currentPath.status == .unsatisfied ? false : true
+    }
+    
+    
+    func authProcess() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if FirebaseManager.shared.getSingedUserUid() != nil {
+                FirebaseManager.shared.signOut { (error) in
+                    if error != nil {
+                        self.presentAlertWithOk(message: BOError.cantAuthAnonymously.rawValue)
+                    }
+                }
+            }
+            
+            FirebaseManager.shared.authAnonymous { userUid, error in
+                if error != nil {
+                    self.presentAlertWithOk(message: BOError.cantAuthAnonymously.rawValue)
+                } else {
+                    self.userUid = userUid
+                    
+                }
+            }
+            
+        }
     }
     
     
@@ -168,20 +175,23 @@ class PredictOfDayVC: BODataLoadingViewController {
     private func getUserData(userUid: String?) {
         guard let userUid = userUid else { return }
         FirebaseManager.shared.getUser(uid: userUid) { user, error in
-            guard let _ = error else {
+            guard error != nil else {
                 self.user = user
                 
                 return
             }
+            //print("DEBUG: error in getUserData: \(error)")
             self.presentAlertWithOk(message: BOError.internetError.rawValue)
         }
     }
     
     
     private func getDailyPredictions() {
+        DispatchQueue.global(qos: .userInitiated).async {
             FirebaseManager.shared.loadPredictions { predictions, error in
                 self.dismissLoadingView()
-                if let _ = error {
+                if error != nil {
+                    //print("DEBUG: error in getDailyPrediction: \(error)")
                     self.presentAlertWithOk(message: BOError.internetError.rawValue)
                 } else {
                     guard let predictions = predictions else {
@@ -191,17 +201,23 @@ class PredictOfDayVC: BODataLoadingViewController {
                     self.predictions = predictions
                 }
             }
-
+        }
     }
     
     
     private func createAndLoadRewardedAd() -> GADRewardedAd? {
-        let rewardedAd = GADRewardedAd(adUnitID: AdmobId.testId)
-        rewardedAd.load(GADRequest()) { error in
-            if let _ = error {
-                self.presentAlertWithOk(message: BOError.internetError.rawValue)
-            } else {
-                self.headerView.earnCoinButtonStatus(isActive: true)
+        let rewardedAd = GADRewardedAd(adUnitID: AdmobId.addID)
+        DispatchQueue.global(qos: .userInitiated).async {
+            //print("DEBUG: createAndLoadRewardedAd in background")
+            
+            rewardedAd.load(GADRequest()) { error in
+                if error != nil {
+                    //print("DEBUG: error in load ad: \(error)")
+                    self.presentAlertWithOk(message: BOError.internetError.rawValue)
+                } else {
+                    //print("DEBUG: createAndLoadRewardedAd is end successfuly background")
+                    self.headerView.earnCoinButtonStatus(isActive: true)
+                }
             }
         }
         return rewardedAd
@@ -214,6 +230,7 @@ class PredictOfDayVC: BODataLoadingViewController {
 extension PredictOfDayVC: BOHeaderViewDelegate {
     func didTapRefreshButton() {
         if checkConnection() == false {
+            //print("DEBUG: error in connection")
             self.presentAlertWithOk(message: BOError.internetError.rawValue)
             return
         }
@@ -240,6 +257,7 @@ extension PredictOfDayVC: BOPredictionViewDelegate {
             self.presentAlertWithOk(message: BOError.haveNotEnoughCoun.rawValue)
             return false
         } else if checkConnection() == false {
+            //print("DEBUG: error in connection")
             self.presentAlertWithOk(message: BOError.internetError.rawValue)
             return false
         } else {

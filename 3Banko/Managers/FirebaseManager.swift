@@ -14,6 +14,16 @@ struct FirebaseManager {
     
     let db = Firestore.firestore()
     
+    func signOut(completion: @escaping(Error?)-> Void) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            completion(error)
+        }
+        completion(nil)
+        
+    }
+    
     func loadPredictions(completion: @escaping ([String: Any]?, Error?) -> Void) {
         var predicts: [String: Any]?
         
@@ -63,9 +73,13 @@ struct FirebaseManager {
         return Auth.auth().currentUser?.uid
     }
     
+    func deleteCurrentUser(completion: @escaping(Error?)-> Void) {
+        Auth.auth().currentUser?.delete(completion: completion)
+    }
+    
     
     func firstLaunchOption(with userUid: String, completion: @escaping(Error?)-> Void) {
-        db.collection("Users").document(userUid).setData(["userUid" : userUid, "coinCount" : 5, "isPaidUser": false], completion: completion)
+        db.collection("Users").document(userUid).setData(["userUid" : userUid, "coinCount" : 3, "isPaidUser": false], completion: completion)
     }
     
     

@@ -100,11 +100,11 @@ class BOHeaderView: UIView {
     
     func earnCoinButtonStatus(isActive: Bool) {
         if isActive {
-            earnCoinButton.isEnabled = true
-            earnCoinButton.backgroundColor = Color.BOGreen
+            self.earnCoinButton.isEnabled = true
+            self.earnCoinButton.backgroundColor = Color.BOGreen
         } else {
-            earnCoinButton.isEnabled = false
-            earnCoinButton.backgroundColor = .systemGray
+            self.earnCoinButton.isEnabled = false
+            self.earnCoinButton.backgroundColor = .systemGray
         }
     }
     

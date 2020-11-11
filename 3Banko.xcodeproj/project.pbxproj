@@ -517,6 +517,7 @@
 				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -542,6 +543,7 @@
 				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
