@@ -103,7 +103,7 @@ class BOHeaderView: UIView {
             self.earnCoinButton.isEnabled = true
             self.earnCoinButton.backgroundColor = Color.BOGreen
         } else {
-            self.earnCoinButton.isEnabled = false
+            self.earnCoinButton.isEnabled = true
             self.earnCoinButton.backgroundColor = .systemGray
         }
     }

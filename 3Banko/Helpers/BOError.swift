@@ -16,6 +16,8 @@ enum BOError: String, Error {
     case cantUpdateCoinWithDown = "Jeton bilgisi güncellenemedi.\nJetonunuz iade edildi."
     case cantUpdateCoinWithUp = "Jeton bilgisi güncellenemedi.\nJetonunuz ger alindi."
     case haveNotEnoughCoun = "Yeterli jetonunuz yok.\nJeton kazan butonuyla reklam izleyerek jeton kazanabilirsiniz."
-    case cantPresentAd = "Reklam gosterilemedi.\nInternet baglantinizi kontrol ettikten sonra tekrar deneyin."
+    case cantPresentAdFirstError = "1 jeton hediye!\nDaha sonra tekrar deneyiniz. Reklam hazır olduğunda buton yeşil olacaktır."
+    case cantPresentAd = "Daha sonra tekrar deneyiniz. Reklam hazır olduğunda buton yeşil olacaktır."
     case internetError = "Sunucuyla baglanti kurulamadi.\nInternet baglantinizi kontrol ettikten sonra sayfayi yenileyiniz."
+    case cantPresentAdTitle = "Ödüllü reklam gosterilemedi."
 }

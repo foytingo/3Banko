@@ -14,7 +14,7 @@ enum Color {
 
 enum AdmobId {
     static let testId = "ca-app-pub-3940256099942544/5224354917"
-    static let addID = "ca-app-pub-1024628359947334/2851302157"
+    static let addID = "ca-app-pub-1024628359947334/7259979125"
 }
 
 enum ScreenSize {

@@ -32,5 +32,7 @@
 	<string>1:652715342598:ios:731c9a8c41aae09baefc87</string>
 	<key>DATABASE_URL</key>
 	<string>https://banko3client.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-1024628359947334~3111334215</string>
 </dict>
 </plist>

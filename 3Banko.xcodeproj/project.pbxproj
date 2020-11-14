@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		46421CAB25495A2D001772B8 /* BOButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46421CAA25495A2D001772B8 /* BOButton.swift */; };
 		46421CB0254969B8001772B8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46421CAF254969B8001772B8 /* FirebaseManager.swift */; };
-		46421CB325496AFC001772B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46421CB225496AFC001772B8 /* GoogleService-Info.plist */; };
+		464A69FE25601CE000E97F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 464A69FD25601CE000E97F8C /* GoogleService-Info.plist */; };
 		464B3AD125484D7100B56BFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD025484D7100B56BFC /* AppDelegate.swift */; };
 		464B3AD325484D7100B56BFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464B3AD225484D7100B56BFC /* SceneDelegate.swift */; };
 		464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464B3AD925484D7300B56BFC /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 		41636D0C22CC5BA6A3A94A7B /* Pods-3Banko.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-3Banko.debug.xcconfig"; path = "Target Support Files/Pods-3Banko/Pods-3Banko.debug.xcconfig"; sourceTree = "<group>"; };
 		46421CAA25495A2D001772B8 /* BOButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BOButton.swift; sourceTree = "<group>"; };
 		46421CAF254969B8001772B8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		46421CB225496AFC001772B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		464A69FD25601CE000E97F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		464B3ACD25484D7100B56BFC /* 3Banko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3Banko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464B3AD025484D7100B56BFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464B3AD225484D7100B56BFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 				46EB17B02552B6E600FD736D /* 3Banko.entitlements */,
 				464B3B2E2548956B00B56BFC /* Supporting Files */,
 				464B3ADE25484D7300B56BFC /* Info.plist */,
-				46421CB225496AFC001772B8 /* GoogleService-Info.plist */,
+				464A69FD25601CE000E97F8C /* GoogleService-Info.plist */,
 				464B3B242548954400B56BFC /* Screens */,
 				469BCA002551BFAE00EE1585 /* Custom Views */,
 				464B3B2C2548956200B56BFC /* Model */,
@@ -301,7 +301,7 @@
 			files = (
 				464B3ADD25484D7300B56BFC /* LaunchScreen.storyboard in Resources */,
 				464B3ADA25484D7300B56BFC /* Assets.xcassets in Resources */,
-				46421CB325496AFC001772B8 /* GoogleService-Info.plist in Resources */,
+				464A69FE25601CE000E97F8C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +517,7 @@
 				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
@@ -543,7 +543,7 @@
 				CODE_SIGN_ENTITLEMENTS = 3Banko/3Banko.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 3FP28BF586;
 				INFOPLIST_FILE = 3Banko/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;

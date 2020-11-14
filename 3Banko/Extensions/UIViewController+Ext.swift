@@ -14,4 +14,10 @@ extension UIViewController {
         ac.addAction(UIAlertAction(title: "Tamam", style: .default))
         present(ac, animated: true)
     }
+    
+    func presentAlertWithOkAndTitle(title: String, message: String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(ac, animated: true)
+    }
 }

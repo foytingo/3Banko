@@ -21,7 +21,9 @@ class PredictOfDayVC: BODataLoadingViewController {
     let predictTwo = BOPredictionView(frame: .zero)
     let predictThree = BOPredictionView(frame: .zero)
     
+    var errorCountAd = 0
     var didEarnCoin = false
+    
     var rewardedAd: GADRewardedAd?
     
     var predictions: [String: Any]? {
@@ -86,10 +88,10 @@ class PredictOfDayVC: BODataLoadingViewController {
         monitor.start(queue: queue)
         
         showLoadingView()
-        requestIDFA()
+        //requestIDFA()
         authProcess()
         configureViewController()
-        
+        rewardedAd = createAndLoadRewardedAd()
     }
     
     
@@ -123,6 +125,7 @@ class PredictOfDayVC: BODataLoadingViewController {
                 if error != nil {
                     self.presentAlertWithOk(message: BOError.cantAuthAnonymously.rawValue)
                 } else {
+                    //print("DEBUG: UserUid: \(userUid ?? "This should be user uid")")
                     self.userUid = userUid
                     
                 }
@@ -181,7 +184,7 @@ class PredictOfDayVC: BODataLoadingViewController {
                 return
             }
             //print("DEBUG: error in getUserData: \(error)")
-            self.presentAlertWithOk(message: BOError.internetError.rawValue)
+            self.presentAlertWithOk(message: BOError.cantGetUser.rawValue)
         }
     }
     
@@ -192,7 +195,7 @@ class PredictOfDayVC: BODataLoadingViewController {
                 self.dismissLoadingView()
                 if error != nil {
                     //print("DEBUG: error in getDailyPrediction: \(error)")
-                    self.presentAlertWithOk(message: BOError.internetError.rawValue)
+                    self.presentAlertWithOk(message: BOError.cantLoadPredictions.rawValue)
                 } else {
                     guard let predictions = predictions else {
                         self.presentAlertWithOk(message: BOError.cantLoadPredictions.rawValue)
@@ -208,16 +211,14 @@ class PredictOfDayVC: BODataLoadingViewController {
     private func createAndLoadRewardedAd() -> GADRewardedAd? {
         let rewardedAd = GADRewardedAd(adUnitID: AdmobId.addID)
         DispatchQueue.global(qos: .userInitiated).async {
-            //print("DEBUG: createAndLoadRewardedAd in background")
-            
+
             rewardedAd.load(GADRequest()) { error in
-                if error != nil {
-                    //print("DEBUG: error in load ad: \(error)")
-                    self.presentAlertWithOk(message: BOError.internetError.rawValue)
-                } else {
-                    //print("DEBUG: createAndLoadRewardedAd is end successfuly background")
+                guard error != nil else {
                     self.headerView.earnCoinButtonStatus(isActive: true)
+                    return
                 }
+                
+                self.errorCountAd += 1
             }
         }
         return rewardedAd
@@ -245,7 +246,24 @@ extension PredictOfDayVC: BOHeaderViewDelegate {
         if checkConnection() &&  rewardedAd?.isReady == true  {
             rewardedAd?.present(fromRootViewController: self, delegate:self)
         } else {
-            presentAlertWithOk(message: BOError.cantPresentAd.rawValue)
+
+            if errorCountAd == 1 || errorCountAd % 10 == 0 {
+                presentAlertWithOkAndTitle(title: BOError.cantPresentAdTitle.rawValue, message: BOError.cantPresentAdFirstError.rawValue)
+                self.coinCount += 1
+                let savedUserUid = UserDefaults.standard.string(forKey: "savedUserUid")
+                FirebaseManager.shared.updateCoin(uid: savedUserUid, coinCount: coinCount) { (error) in
+                    if let _ = error {
+                        self.coinCount -= 1
+                        self.presentAlertWithOk(message: BOError.cantUpdateCoinWithUp.rawValue)
+                    }
+                }
+                self.headerView.coinUpAndDownAnimation(coinCase: .up)
+            } else {
+                presentAlertWithOkAndTitle(title: BOError.cantPresentAdTitle.rawValue, message: BOError.cantPresentAd.rawValue)
+            }
+            
+            rewardedAd = createAndLoadRewardedAd()
+
         }
     }
 }
