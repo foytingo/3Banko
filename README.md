@@ -14,7 +14,7 @@ Admin-side iOS application that you can add new match prediction and update old 
 - Users get a notification when the daily prediction is ready.
 
 
-#### Manager App [Github](https://github.com/foytingo/3Banko-Admin "Github")
+#### Manager App [Github](https://github.com/foytingo/3BankoAdmin "Github")
 - Admin can enter the result of daily predictions and dd new predictions with the add button.
 
 #### Used
